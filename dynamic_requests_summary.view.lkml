@@ -57,19 +57,17 @@ view: dynamic_requests_summary {
   dimension: max {
     type: number
     sql: ${TABLE}.max ;;
-    value_format: "0.00 \" s\""
   }
 
   dimension: avg {
     type: number
     sql: ${TABLE}.avg ;;
-    value_format: "0.00 \" s\""
   }
 
   dimension: current_second {
     type: number
     sql: ${TABLE}.current_second ;;
-    value_format: "0.00 \" s\""
+
   }
 
   set: detail {

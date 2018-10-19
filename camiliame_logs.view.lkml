@@ -8,6 +8,9 @@ view: camiliame_logs {
           (edgePathingSrc = 'hot' AND edgePathingOp = 'ban' AND edgePathingStatus IN ('unknown', 'ip')) OR
           (edgePathingSrc = 'macro' AND edgePathingOp = 'ban' AND edgePathingStatus = 'unknown') OR
           (edgePathingSrc = 'macro' AND edgePathingOp = 'chl' AND edgePathingStatus IN ('captchaFail', 'jschlFail')) OR
+          (edgePathingSrc = 'user' AND edgePathingOp = 'ban' AND edgePathingStatus = 'zl') OR
+          (edgePathingSrc = 'user' AND edgePathingOp = 'ban' AND edgePathingStatus = 'ua') OR
+          (edgePathingSrc = 'user' AND edgePathingOp = 'ban' AND edgePathingStatus = 'rateLimit') OR
           (edgePathingSrc = 'user' AND edgePathingOp = 'ban' AND edgePathingStatus IN ('ctry', 'ip', 'ipr16', 'ipr24', 'ip6', 'ip6r64', 'ip6r48', 'ip6r32'))
           ;;
   }
@@ -26,6 +29,9 @@ view: camiliame_logs {
     type: string
     sql:  case when ${edge_pathing_status}='ip' then 'ip block'
                when ${edge_pathing_status}='ctry' then 'country block'
+               when ${edge_pathing_status}='zl' then 'routed by zonelockdown'
+               when ${edge_pathing_status}='ua' then 'blocked user agent'
+               when ${edge_pathing_status}='rateLimit' then 'rate-limiting rule'
       else ${edge_pathing_status}
       end ;;
     group_label: "Edge"
@@ -526,8 +532,69 @@ view: camiliame_logs {
   measure: count {
     type: count
     drill_fields: [default*]
-    label: "Count"
+    label: "Requests"
     }
+
+  measure: percentile99_originresponsetime {
+    type: percentile
+    percentile: 99
+    sql:  ${TABLE}.OriginResponseTime/1e6 ;;
+    value_format: "0.00 \" ms\""
+    label: "p99"
+  }
+
+  measure: percentile95_originresponsetime {
+    type: percentile
+    percentile: 95
+    sql:  ${TABLE}.OriginResponseTime/1e6 ;;
+    value_format: "0.00 \" ms\""
+    label: "p95"
+  }
+
+  measure: percentile75_originresponsetime {
+    type: percentile
+    percentile: 75
+    sql:  ${TABLE}.OriginResponseTime/1e6 ;;
+    value_format: "0.00 \" ms\""
+    label: "p75"
+  }
+
+  measure: percentile50_originresponsetime {
+    type: percentile
+    percentile: 50
+    sql:  ${TABLE}.OriginResponseTime/1e6 ;;
+    value_format: "0.00 \" ms\""
+    label: "p50"
+  }
+
+  measure: percentile999_originresponsetime {
+    type: percentile
+    percentile: 99.9
+    sql:  ${TABLE}.OriginResponseTime/1e6 ;;
+    value_format: "0.00 \" ms\""
+    label: "p999"
+  }
+
+  measure: avg_originresponsetime {
+    type: average
+    sql:  ${TABLE}.OriginResponseTime/1e6 ;;
+    value_format: "0.00 \" ms\""
+    label: "avg"
+  }
+
+  measure: waittime_originresponsetime {
+    type: sum
+    sql:  ${TABLE}.OriginResponseTime/1e6 ;;
+    value_format: "0.00 \" ms\""
+    label: "WaitTimePerSecond"
+  }
+
+  measure: max_originresponsetime {
+    type: max
+    sql:  ${TABLE}.OriginResponseTime/1e6 ;;
+    value_format: "0.00 \" ms\""
+    label: "max"
+  }
 
   measure: threat_count {
     type: count
@@ -628,6 +695,12 @@ view: camiliame_logs {
     type: average
     sql: ${edge_response_time} ;;
     group_label: "Edge"
+  }
+
+  measure: origin_avg_repsonse_time {
+    type: average
+    sql: ${origin_response_time} ;;
+    group_label: "Origin"
   }
 
   measure: total_edge_bandwidth {

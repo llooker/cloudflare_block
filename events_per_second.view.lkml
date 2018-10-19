@@ -23,6 +23,7 @@ view: events_per_second {
     sql: ${events_per_second_count} ;;
     value_format_name: decimal_0
     drill_fields: [detail*]
+    label: "avg rps"
   }
 
   measure: min_events_per_second {
