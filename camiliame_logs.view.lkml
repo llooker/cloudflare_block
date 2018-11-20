@@ -575,6 +575,13 @@ view: camiliame_logs {
     label: "Requests"
     }
 
+  measure: avg_rps_15m {
+    type: number
+    sql: count(*) / (60*15) ;;
+    drill_fields: [default*]
+    label: "total rps"
+  }
+
   measure: percentile99_originresponsetime {
     type: percentile
     percentile: 99
@@ -688,6 +695,17 @@ view: camiliame_logs {
           {% else %} {{value | round: 2}} bytes {% endif %} ;;
   }
 
+  measure: average_total_bandwidth {
+    type: average
+    sql: ${edge_response_bytes} ;;
+     value_format: "[>=1099511627776]0.00,,,,\" TB\";[>=1073741824]0.00,,,\" GB\";[>=1048576]0.00,,\" MB\""
+    html: {% if value > 1000000000000 %} {{ value | divided_by: 1000000000000.0 | round: 2}} Tbps
+          {% elsif value > 1000000000 %} {{ value | divided_by: 1000000000.0 | round: 2}} Gbps
+          {% elsif value > 1000000 %} {{ value | divided_by: 1000000.0 | round: 2}} Mbps
+          {% elsif value > 1000 %} {{ value | divided_by: 1000.0 | round: 2}} Kbps
+          {% else %} {{value | round: 2}} bytes {% endif %} ;;
+  }
+
   measure: saved_bandwidth {
     type: sum
     sql: ${edge_response_bytes} ;;
@@ -700,6 +718,21 @@ view: camiliame_logs {
           {% elsif value > 1073741824 %} {{ value | divided_by: 1073741824.0 | round: 2}} GB
           {% elsif value > 1048576 %} {{ value | divided_by: 1048576.0 | round: 2}} MB
           {% elsif value > 1024 %} {{ value | divided_by: 1024.0 | round: 2}} KB
+          {% else %} {{value | round: 2}} bytes {% endif %} ;;
+  }
+
+  measure: average_saved_bandwidth {
+    type: average
+    sql: ${edge_response_bytes} ;;
+    filters: {
+      field: is_cached_b
+      value: "yes"
+    }
+     value_format: "[>=1099511627776]0.00,,,,\" TB\";[>=1073741824]0.00,,,\" GB\";[>=1048576]0.00,,\" MB\""
+    html: {% if value > 1000000000000 %} {{ value | divided_by: 1000000000000.0 | round: 2}} Tbps
+          {% elsif value > 1000000000 %} {{ value | divided_by: 1000000000.0 | round: 2}} Gbps
+          {% elsif value > 1000000 %} {{ value | divided_by: 1000000.0 | round: 2}} Mbps
+          {% elsif value > 1000 %} {{ value | divided_by: 1000.0 | round: 2}} Kbps
           {% else %} {{value | round: 2}} bytes {% endif %} ;;
   }
 
@@ -717,10 +750,26 @@ view: camiliame_logs {
       value: "yes"
     }
     value_format: "[>=1000000000]0.0,,,\"e9\";[>=1000000]0.0,,,\"e6\";[>=1000]0.0,,,\"e3 \";0.00"
-    html: {% if value > 1099511627776 %} {{ value | divided_by: 1099511627776.0 | round: 2}} TB
-          {% elsif value > 1073741824 %} {{ value | divided_by: 1073741824.0 | round: 2}} GB
-          {% elsif value > 1048576 %} {{ value | divided_by: 1048576.0 | round: 2}} MB
-          {% elsif value > 1024 %} {{ value | divided_by: 1024.0 | round: 2}} KB
+    html: {% if value > 1099511627776 %} {{ value | divided_by: 1099511627776.0 | round: 2}} TiB
+          {% elsif value > 1073741824 %} {{ value | divided_by: 1073741824.0 | round: 2}} GiB
+          {% elsif value > 1048576 %} {{ value | divided_by: 1048576.0 | round: 2}} MiB
+          {% elsif value > 1024 %} {{ value | divided_by: 1024.0 | round: 2}} KiB
+          {% else %} {{value | round: 2}} bytes {% endif %} ;;
+  }
+
+
+  measure: average_uncached_bandwidth {
+    type: average
+    sql: ${edge_response_bytes} ;;
+    filters: {
+      field: is_not_cached_b
+      value: "yes"
+    }
+     value_format: "[>=1099511627776]0.00,,,,\" TB\";[>=1073741824]0.00,,,\" GB\";[>=1048576]0.00,,\" MB\""
+    html: {% if value > 1000000000000 %} {{ value | divided_by: 1000000000000.0 | round: 2}} Tbps
+          {% elsif value > 1000000000 %} {{ value | divided_by: 1000000000.0 | round: 2}} Gbps
+          {% elsif value > 1000000 %} {{ value | divided_by: 1000000.0 | round: 2}} Mbps
+          {% elsif value > 1000 %} {{ value | divided_by: 1000.0 | round: 2}} Kbps
           {% else %} {{value | round: 2}} bytes {% endif %} ;;
   }
 
@@ -757,6 +806,20 @@ view: camiliame_logs {
           {% else %} {{value | round: 2}} bytes {% endif %} ;;
   }
 
+  measure: average_origin_bandwidth {
+    type: average
+    sql: ${edge_response_bytes} ;;
+    filters: {
+      field: is_origin
+      value: "yes"
+    }
+    value_format: "[>=1099511627776]0.00,,,,\" TB\";[>=1073741824]0.00,,,\" GB\";[>=1048576]0.00,,\" MB\""
+    html: {% if value > 1000000000000 %} {{ value | divided_by: 1000000000000.0 | round: 2}} Tbps
+          {% elsif value > 1000000000 %} {{ value | divided_by: 1000000000.0 | round: 2}} Gbps
+          {% elsif value > 1000000 %} {{ value | divided_by: 1000000.0 | round: 2}} Mbps
+          {% elsif value > 1000 %} {{ value | divided_by: 1000.0 | round: 2}} Kbps
+          {% else %} {{value | round: 2}} bytes {% endif %} ;;
+  }
 
 
 #########################################################################################

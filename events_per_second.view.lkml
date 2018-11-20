@@ -12,19 +12,13 @@ view: events_per_second {
 #       persist_for: "168 hours"
   }
 
-  measure: count {
-    type: count
-    drill_fields: [detail*]
-    hidden: yes
-  }
-
   measure: avg_events_per_second {
     type: average
     sql: ${events_per_second_count} ;;
     value_format_name: decimal_0
     drill_fields: [detail*]
-    label: "avg rps"
   }
+
 
   measure: min_events_per_second {
     type: min

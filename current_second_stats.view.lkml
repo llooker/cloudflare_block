@@ -1,7 +1,7 @@
 view: current_second_stats {
   derived_table: {
     sql: select max(TIMESTAMP_TRUNC(edgestarttimestamp, SECOND)) as current_second,
-                sum(edgeresponsebytes) as current_bps,
+                avg(edgeresponsebytes) as current_bps,
                 count(*) as current_ops
         from camiliame_logs
         where TIMESTAMP_TRUNC(edgestarttimestamp, SECOND) = (SELECT max(TIMESTAMP_TRUNC(edgestarttimestamp, SECOND)) from camiliame_logs)
