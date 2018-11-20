@@ -19,7 +19,6 @@ view: events_per_second {
     drill_fields: [detail*]
   }
 
-
   measure: min_events_per_second {
     type: min
     sql: ${events_per_second_count} ;;

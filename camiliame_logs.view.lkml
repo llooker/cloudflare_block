@@ -578,6 +578,7 @@ view: camiliame_logs {
   measure: avg_rps_15m {
     type: number
     sql: count(*) / (60*15) ;;
+    value_format_name: decimal_0
     drill_fields: [default*]
     label: "total rps"
   }
