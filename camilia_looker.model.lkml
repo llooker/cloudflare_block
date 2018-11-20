@@ -29,16 +29,10 @@ explore: camiliame_logs {
  #   sql_on: ${camiliame_logs.edge_start_timestamp_second} = ${current_second_stats.current_second} ;;
   }
 
-  join: origin_response_time_quantiles {
-    type: left_outer
-    relationship: one_to_one
-    sql_on: ${camiliame_logs.edge_start_timestamp_second} = ${origin_response_time_quantiles.EdgeStartTimestamp_second} ;;
-  }
+
 }
 
-explore: dynamic_requests_summary {}
 
-explore: static_requests_summary {}
 
 explore: events_per_second {}
 

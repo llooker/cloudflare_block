@@ -5,14 +5,17 @@ view: camiliame_logs {
   dimension: is_threat {
     type: yesno
     sql: (edgePathingSrc = 'bic' AND edgePathingOp = 'ban' AND edgePathingStatus = 'unknown') OR
-          (edgePathingSrc = 'hot' AND edgePathingOp = 'ban' AND edgePathingStatus IN ('unknown', 'ip')) OR
+          (edgePathingSrc = 'hot' AND edgePathingOp = 'ban' AND edgePathingStatus = 'unknown') OR
+          (edgePathingSrc = 'hot' AND edgePathingOp = 'ban' AND edgePathingStatus = 'ip') OR
           (edgePathingSrc = 'macro' AND edgePathingOp = 'ban' AND edgePathingStatus = 'unknown') OR
-          (edgePathingSrc = 'macro' AND edgePathingOp = 'chl' AND edgePathingStatus IN ('captchaFail', 'jschlFail')) OR
+          (edgePathingSrc = 'macro' AND edgePathingOp = 'chl' AND edgePathingStatus = 'captchaFail') OR
+          (edgePathingSrc = 'macro' AND edgePathingOp = 'chl' AND edgePathingStatus ='jschlFail') OR
           (edgePathingSrc = 'user' AND edgePathingOp = 'ban' AND edgePathingStatus = 'zl') OR
           (edgePathingSrc = 'user' AND edgePathingOp = 'ban' AND edgePathingStatus = 'ua') OR
           (edgePathingSrc = 'user' AND edgePathingOp = 'ban' AND edgePathingStatus = 'rateLimit') OR
-          (edgePathingSrc = 'user' AND edgePathingOp = 'ban' AND edgePathingStatus IN ('ctry', 'ip', 'ipr16', 'ipr24', 'ip6', 'ip6r64', 'ip6r48', 'ip6r32'))
-          ;;
+          (edgePathingSrc = 'user' AND edgePathingOp = 'ban' AND edgePathingStatus = 'ctry') OR
+          (edgePathingSrc = 'user' AND edgePathingOp = 'ban' AND edgePathingStatus = 'ip') OR
+          (edgePathingSrc = 'user' AND edgePathingOp = 'ban' AND edgePathingStatus IN ('ipr16', 'ipr24', 'ip6', 'ip6r64', 'ip6r48', 'ip6r32'));;
   }
 
   dimension: is_dynamic {
@@ -27,11 +30,15 @@ view: camiliame_logs {
 
   dimension: edgepathingstatus_full {
     type: string
-    sql:  case when ${edge_pathing_status}='ip' then 'ip block'
-               when ${edge_pathing_status}='ctry' then 'country block'
-               when ${edge_pathing_status}='zl' then 'routed by zonelockdown'
-               when ${edge_pathing_status}='ua' then 'blocked user agent'
-               when ${edge_pathing_status}='rateLimit' then 'rate-limiting rule'
+    sql:  case when ${edge_pathing_src}='user' AND ${edge_pathing_op}='ban' AND ${edge_pathing_status}='ip' then 'ip block'
+               when ${edge_pathing_src}='user' AND ${edge_pathing_op}='ban' AND ${edge_pathing_status}='ctry' then 'country block'
+               when ${edge_pathing_src}='user' AND ${edge_pathing_op}='ban' AND ${edge_pathing_status}='zl' then 'routed by zone lockdown'
+               when ${edge_pathing_src}='user' AND ${edge_pathing_op}='ban' AND ${edge_pathing_status}='ua' then 'blocked user agent'
+               when ${edge_pathing_src}='user' AND ${edge_pathing_op}='ban' AND ${edge_pathing_status}='rateLimit' then 'rate-limiting rule'
+               when ${edge_pathing_src}='bic' AND ${edge_pathing_op}='ban' AND ${edge_pathing_status}='unknown' then 'browser integrity check'
+               when ${edge_pathing_src}='hot' AND ${edge_pathing_op}='ban' AND ${edge_pathing_status}='unknown' then 'blocked hotlink'
+               when ${edge_pathing_src}='macro' AND ${edge_pathing_op}='chl' AND ${edge_pathing_status}='captchaFail' then 'CAPTCHA challenge failed'
+               when ${edge_pathing_src}= 'macro' AND ${edge_pathing_op}='chl' AND ${edge_pathing_status}='jschlFail' then 'java script challenge failed'
       else ${edge_pathing_status}
       end ;;
     group_label: "Edge"
@@ -333,6 +340,39 @@ view: camiliame_logs {
     sql: ${TABLE}.EdgeResponseStatus ;;
     group_label: "Edge"
   }
+
+  dimension: edge_response_status_class {
+    type: string
+    group_label: "Edge"
+    sql: CASE WHEN ${TABLE}.EdgeResponseStatus BETWEEN 200 and 299 THEN '2xx'
+              WHEN ${TABLE}.EdgeResponseStatus BETWEEN 300 and 399 THEN '3xx'
+              WHEN ${TABLE}.EdgeResponseStatus BETWEEN 400 and 499 THEN '4xx'
+              WHEN ${TABLE}.EdgeResponseStatus BETWEEN 500 and 599 THEN '5xx'
+              WHEN ${TABLE}.EdgeResponseStatus BETWEEN 0 and 099 THEN '0 - Served from CF Edge'
+          END ;;
+  }
+
+  dimension: edge_response_status_class_5xx {
+    type: string
+    group_label: "Edge"
+    sql: CASE WHEN ${TABLE}.EdgeResponseStatus BETWEEN 500 and 599 THEN '5xx'
+      END ;;
+  }
+
+  dimension: edge_response_status_class_4xx {
+    type: string
+    group_label: "Edge"
+    sql: CASE WHEN ${TABLE}.EdgeResponseStatus BETWEEN 400 and 499 THEN '4xx'
+      END ;;
+  }
+
+  dimension: edge_response_status_class_3xx {
+    type: string
+    group_label: "Edge"
+    sql: CASE WHEN ${TABLE}.EdgeResponseStatus BETWEEN 300 and 399 THEN '3xx'
+      END ;;
+  }
+
 
   dimension: edge_server_ip {
     type: string
@@ -656,7 +696,6 @@ view: camiliame_logs {
       value: "yes"
     }
     value_format: "[>=1099511627776]0.00,,,,\" TB\";[>=1073741824]0.00,,,\" GB\";[>=1048576]0.00,,\" MB\""
-#     value_format: "[>=1099511627776]0.0,,,,\"e9\";[>=1073741824]0.0,,,\"e6\";[>=1048576]0.0,,\"e3 \";[>=1024]0.0,\"e3 \""
     html: {% if value > 1099511627776 %} {{ value | divided_by: 1099511627776.0 | round: 2}} TB
           {% elsif value > 1073741824 %} {{ value | divided_by: 1073741824.0 | round: 2}} GB
           {% elsif value > 1048576 %} {{ value | divided_by: 1048576.0 | round: 2}} MB
@@ -703,13 +742,7 @@ view: camiliame_logs {
     group_label: "Origin"
   }
 
-  measure: total_edge_bandwidth {
-    type:  sum
-    sql: ${edge_response_bytes};;
-    value_format: "#.##,, \"Mbps\""
-  }
-
-  measure: total_origin_bandwidth {
+  measure: origin_bandwidth {
     type:  sum
     sql: ${edge_response_bytes};;
     filters: {
@@ -724,10 +757,7 @@ view: camiliame_logs {
           {% else %} {{value | round: 2}} bytes {% endif %} ;;
   }
 
-  measure: sum_outbound_bandwidth {
-    type: sum
-    sql: ${edge_response_bytes} * 8 ;;
-  }
+
 
 #########################################################################################
 ################################    DRILL SETS    #######################################
