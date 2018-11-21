@@ -580,7 +580,31 @@ view: camiliame_logs {
     sql: count(*) / (60*15) ;;
     value_format_name: decimal_0
     drill_fields: [default*]
-    label: "total rps"
+    label: "total requests in rps"
+  }
+
+  measure: origin_rps_15m {
+    type: number
+    sql: count(${is_origin}) / (60*15) ;;
+    value_format_name: decimal_0
+    drill_fields: [default*]
+    label: "origin requests in rps"
+  }
+
+  measure: cached_rps_15m {
+    type: number
+    sql: count(${is_cached_r}) / (60*15) ;;
+    value_format_name: decimal_0
+    drill_fields: [default*]
+    label: "cached requests in rps"
+  }
+
+  measure: not_cached_rps_15m {
+    type: number
+    sql: count(${is_not_cached_r}) / (60*15) ;;
+    value_format_name: decimal_0
+    drill_fields: [default*]
+    label: "uncached requests in rps"
   }
 
   measure: percentile99_originresponsetime {
