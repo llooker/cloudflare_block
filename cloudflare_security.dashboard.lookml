@@ -27,8 +27,7 @@
     col: 1
     width: 22
     height: 2
-  - name: '<img style="display: block;" class="top-nav__logo top-nav__logo--dark top-nav__logo--transparent"
-      src="https://www.cloudflare.com/img/logo-cloudflare-dark.svg">'
+  - name: logo
     type: text
     title_text: '<img style="display: block;" class="top-nav__logo top-nav__logo--dark
       top-nav__logo--transparent" src="https://www.cloudflare.com/img/logo-cloudflare-dark.svg">'
