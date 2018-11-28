@@ -1,4 +1,4 @@
-view: camiliame_logs {
+view: cloudflare_logs {
   sql_table_name: cloudflare_logs.camiliame_logs ;;
 
 
