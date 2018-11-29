@@ -787,108 +787,6 @@
     col: 16
     width: 7
     height: 5
-  - title: Edge Response Status in rps
-    name: Edge Response Status in rps
-    model: cloudflare_looker
-    explore: cloudflare_logs
-    type: looker_line
-    fields:
-    - cloudflare_logs.edge_start_timestamp_minute15
-    - cloudflare_logs.count
-    - cloudflare_logs.edge_response_status
-    pivots:
-    - cloudflare_logs.edge_response_status
-    fill_fields:
-    - cloudflare_logs.edge_start_timestamp_minute15
-    sorts:
-    - cloudflare_logs.edge_start_timestamp_minute15 desc
-    - cloudflare_logs.edge_response_status
-    limit: 500
-    column_limit: 50
-    query_timezone: America/Los_Angeles
-    stacking: ''
-    colors:
-    - "#5245ed"
-    - "#ed6168"
-    - "#1ea8df"
-    - "#353b49"
-    - "#49cec1"
-    - "#b3a0dd"
-    - "#db7f2a"
-    - "#706080"
-    - "#a2dcf3"
-    - "#776fdf"
-    - "#e9b404"
-    - "#635189"
-    show_value_labels: false
-    label_density: 25
-    legend_position: right
-    hide_legend: false
-    x_axis_gridlines: true
-    y_axis_gridlines: true
-    show_view_names: true
-    point_style: none
-    series_colors:
-      200 - cloudflare_logs.count: "#61ed65"
-      404 - cloudflare_logs.count: "#f3280b"
-    series_types: {}
-    limit_displayed_rows: false
-    y_axes:
-    - label: Ops
-      orientation: left
-      series:
-      - id: 0 - camiliame_logs.count
-        name: '0'
-        axisId: cloudflare_logs.count
-      - id: 200 - camiliame_logs.count
-        name: '200'
-        axisId: cloudflare_logs.count
-      - id: 301 - camiliame_logs.count
-        name: '301'
-        axisId: cloudflare_logs.count
-      - id: 404 - camiliame_logs.count
-        name: '404'
-        axisId: cloudflare_logs.count
-      - id: 500 - camiliame_logs.count
-        name: '500'
-        axisId: cloudflare_logs.count
-      showLabels: false
-      showValues: true
-      unpinAxis: false
-      tickDensity: default
-      tickDensityCustom: 5
-      type: linear
-    y_axis_combined: true
-    show_y_axis_labels: true
-    show_y_axis_ticks: true
-    y_axis_tick_density: default
-    y_axis_tick_density_custom: 5
-    show_x_axis_label: true
-    x_axis_label: Edge Start Time (15s)
-    show_x_axis_ticks: true
-    x_axis_scale: auto
-    y_axis_scale_mode: linear
-    x_axis_reversed: false
-    y_axis_reversed: false
-    plot_size_by_field: false
-    show_null_points: true
-    interpolation: linear
-    hidden_fields: []
-    listen:
-      Date: cloudflare_logs.edge_start_timestamp_hour
-      Device Type: cloudflare_logs.client_device_type
-      Country: countries.country_name
-      Client IP: cloudflare_logs.client_ip
-      Hostname: cloudflare_logs.client_request_host
-      Request URI: cloudflare_logs.client_request_uri
-      User Agent: cloudflare_logs.client_request_user_agent
-      Origin Response Status: cloudflare_logs.origin_response_status
-      Edge Response Status: cloudflare_logs.edge_response_status
-      Origin IP: cloudflare_logs.origin_ip
-    row: 14
-    col: 1
-    width: 15
-    height: 5
   - title: Top Countries
     name: Top Countries
     model: cloudflare_looker
@@ -998,76 +896,6 @@
       Origin IP: cloudflare_logs.origin_ip
     row: 19
     col: 1
-    width: 7
-    height: 5
-  - title: Edge Response Status in rps
-    name: Edge Response Status in rps
-    model: cloudflare_looker
-    explore: cloudflare_logs
-    type: table
-    fields:
-    - current_second_stats.current_ops
-    - cloudflare_logs.count
-    - events_per_second.avg_events_per_second
-    - events_per_second.max_events_per_second
-    - events_per_second.min_events_per_second
-    - cloudflare_logs.edge_response_status
-    sorts:
-    - max desc
-    limit: 500
-    column_limit: 50
-    dynamic_fields:
-    - table_calculation: max
-      label: max
-      expression: "${events_per_second.max_events_per_second}"
-      value_format:
-      value_format_name:
-      _kind_hint: measure
-      _type_hint: number
-    - table_calculation: avg
-      label: avg
-      expression: "${events_per_second.avg_events_per_second}"
-      value_format:
-      value_format_name: decimal_1
-      _kind_hint: measure
-      _type_hint: number
-    - table_calculation: current
-      label: current
-      expression: "${current_second_stats.current_ops}"
-      value_format:
-      value_format_name:
-      _kind_hint: dimension
-      _type_hint: number
-    show_view_names: false
-    show_row_numbers: true
-    truncate_column_names: false
-    hide_totals: false
-    hide_row_totals: false
-    table_theme: gray
-    limit_displayed_rows: false
-    enable_conditional_formatting: false
-    conditional_formatting_include_totals: false
-    conditional_formatting_include_nulls: false
-    series_types: {}
-    hidden_fields:
-    - current_second_stats.current_ops
-    - events_per_second.avg_events_per_second
-    - events_per_second.max_events_per_second
-    - events_per_second.min_events_per_second
-    y_axes: []
-    listen:
-      Date: cloudflare_logs.edge_start_timestamp_hour
-      Device Type: cloudflare_logs.client_device_type
-      Country: countries.country_name
-      Client IP: cloudflare_logs.client_ip
-      Hostname: cloudflare_logs.client_request_host
-      Request URI: cloudflare_logs.client_request_uri
-      User Agent: cloudflare_logs.client_request_user_agent
-      Origin Response Status: cloudflare_logs.origin_response_status
-      Edge Response Status: cloudflare_logs.edge_response_status
-      Origin IP: cloudflare_logs.origin_ip
-    row: 14
-    col: 16
     width: 7
     height: 5
   - title: Top Client IPs and AS Number
@@ -1625,6 +1453,151 @@
     row: 26
     col: 16
     width: 7
+    height: 5
+  - title: Edge Response Status in rps
+    name: Edge Response Status in rps
+    model: cloudflare_looker
+    explore: cloudflare_logs
+    type: table
+    fields:
+    - cloudflare_logs.edge_response_status
+    - current_second_stats.current_ops
+    - cloudflare_logs.count
+    - events_per_second.avg_events_per_second
+    - events_per_second.max_events_per_second
+    sorts:
+    - max desc
+    limit: 500
+    column_limit: 50
+    show_view_names: false
+    show_row_numbers: true
+    truncate_column_names: false
+    hide_totals: false
+    hide_row_totals: false
+    table_theme: gray
+    limit_displayed_rows: false
+    enable_conditional_formatting: false
+    conditional_formatting_include_totals: false
+    conditional_formatting_include_nulls: false
+    series_types: {}
+    hidden_fields:
+    y_axes: []
+    listen:
+      Date: cloudflare_logs.edge_start_timestamp_hour
+      Device Type: cloudflare_logs.client_device_type
+      Country: countries.country_name
+      Client IP: cloudflare_logs.client_ip
+      Hostname: cloudflare_logs.client_request_host
+      Request URI: cloudflare_logs.client_request_uri
+      User Agent: cloudflare_logs.client_request_user_agent
+      Origin Response Status: cloudflare_logs.origin_response_status
+      Edge Response Status: cloudflare_logs.edge_response_status
+      Origin IP: cloudflare_logs.origin_ip
+    row: 14
+    col: 16
+    width: 7
+    height: 5
+  - title: Edge Response Status in rps
+    name: Edge Response Status in rps
+    model: cloudflare_looker
+    explore: cloudflare_logs
+    type: looker_line
+    fields:
+    - cloudflare_logs.edge_start_timestamp_minute15
+    - cloudflare_logs.edge_response_status
+    - cloudflare_logs.avg_rps_15m
+    pivots:
+    - cloudflare_logs.edge_response_status
+    fill_fields:
+    - cloudflare_logs.edge_start_timestamp_minute15
+    sorts:
+    - cloudflare_logs.edge_start_timestamp_minute15 desc
+    - cloudflare_logs.edge_response_status
+    limit: 500
+    column_limit: 50
+    query_timezone: America/Los_Angeles
+    stacking: ''
+    colors:
+    - "#5245ed"
+    - "#ed6168"
+    - "#1ea8df"
+    - "#353b49"
+    - "#49cec1"
+    - "#b3a0dd"
+    - "#db7f2a"
+    - "#706080"
+    - "#a2dcf3"
+    - "#776fdf"
+    - "#e9b404"
+    - "#635189"
+    show_value_labels: false
+    label_density: 25
+    legend_position: right
+    hide_legend: false
+    x_axis_gridlines: true
+    y_axis_gridlines: true
+    show_view_names: true
+    point_style: none
+    series_colors:
+      200 - cloudflare_logs.count: "#61ed65"
+      404 - cloudflare_logs.count: "#f3280b"
+    series_types: {}
+    limit_displayed_rows: false
+    y_axes:
+    - label: Ops
+      orientation: left
+      series:
+      - id: 0 - camiliame_logs.count
+        name: '0'
+        axisId: cloudflare_logs.count
+      - id: 200 - camiliame_logs.count
+        name: '200'
+        axisId: cloudflare_logs.count
+      - id: 301 - camiliame_logs.count
+        name: '301'
+        axisId: cloudflare_logs.count
+      - id: 404 - camiliame_logs.count
+        name: '404'
+        axisId: cloudflare_logs.count
+      - id: 500 - camiliame_logs.count
+        name: '500'
+        axisId: cloudflare_logs.count
+      showLabels: false
+      showValues: true
+      unpinAxis: false
+      tickDensity: default
+      tickDensityCustom: 5
+      type: linear
+    y_axis_combined: true
+    show_y_axis_labels: true
+    show_y_axis_ticks: true
+    y_axis_tick_density: default
+    y_axis_tick_density_custom: 5
+    show_x_axis_label: true
+    x_axis_label: Edge Start Time (15s)
+    show_x_axis_ticks: true
+    x_axis_scale: auto
+    y_axis_scale_mode: linear
+    x_axis_reversed: false
+    y_axis_reversed: false
+    plot_size_by_field: false
+    show_null_points: true
+    interpolation: linear
+    hidden_fields: []
+    listen:
+      Date: cloudflare_logs.edge_start_timestamp_hour
+      Device Type: cloudflare_logs.client_device_type
+      Country: countries.country_name
+      Client IP: cloudflare_logs.client_ip
+      Hostname: cloudflare_logs.client_request_host
+      Request URI: cloudflare_logs.client_request_uri
+      User Agent: cloudflare_logs.client_request_user_agent
+      Origin Response Status: cloudflare_logs.origin_response_status
+      Edge Response Status: cloudflare_logs.edge_response_status
+      Origin IP: cloudflare_logs.origin_ip
+    row: 14
+    col: 1
+    width: 15
     height: 5
   filters:
   - name: Date
