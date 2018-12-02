@@ -792,42 +792,6 @@
     col: 13
     width: 6
     height: 2
-  - title: Cached Bandwidth %
-    name: Cached Bandwidth %
-    model: cloudflare_looker
-    explore: cloudflare_logs
-    type: single_value
-    fields:
-    - cloudflare_logs.saved_bandwidth_percentage
-    filters: {}
-    limit: 500
-    query_timezone: America/Los_Angeles
-    custom_color_enabled: false
-    custom_color: forestgreen
-    show_single_value_title: true
-    single_value_title: ''
-    show_comparison: false
-    comparison_type: value
-    comparison_reverse_colors: false
-    show_comparison_label: true
-    series_types: {}
-    hidden_fields: []
-    y_axes: []
-    listen:
-      Date: cloudflare_logs.edge_start_timestamp_hour
-      Device Type: cloudflare_logs.client_device_type
-      Country: countries.country_name
-      Client IP: cloudflare_logs.client_ip
-      Hostname: cloudflare_logs.client_request_host
-      Request URI: cloudflare_logs.client_request_uri
-      User Agent: cloudflare_logs.client_request_user_agent
-      Origin Response Status: cloudflare_logs.origin_response_status
-      Edge Response Status: cloudflare_logs.edge_response_status
-      Origin IP: cloudflare_logs.origin_ip
-    row: 11
-    col: 19
-    width: 4
-    height: 2
   - title: Total Bandwidth vs Origin Bandwidth in Mbps last 24 hours
     name: Total Bandwidth vs Origin Bandwidth in Mbps last 24 hours
     model: cloudflare_looker
@@ -2153,6 +2117,42 @@
     col: 1
     width: 11
     height: 4
+  - title: Saved Bandwidth %
+    name: Saved Bandwidth %
+    model: cloudflare_looker
+    explore: cloudflare_logs
+    type: single_value
+    fields:
+    - cloudflare_logs.saved_bandwidth_percentage
+    filters: {}
+    limit: 500
+    query_timezone: America/Los_Angeles
+    custom_color_enabled: false
+    custom_color: forestgreen
+    show_single_value_title: true
+    single_value_title: ''
+    show_comparison: false
+    comparison_type: value
+    comparison_reverse_colors: false
+    show_comparison_label: true
+    series_types: {}
+    hidden_fields: []
+    y_axes: []
+    listen:
+      Date: cloudflare_logs.edge_start_timestamp_hour
+      Device Type: cloudflare_logs.client_device_type
+      Country: countries.country_name
+      Client IP: cloudflare_logs.client_ip
+      Hostname: cloudflare_logs.client_request_host
+      Request URI: cloudflare_logs.client_request_uri
+      User Agent: cloudflare_logs.client_request_user_agent
+      Origin Response Status: cloudflare_logs.origin_response_status
+      Edge Response Status: cloudflare_logs.edge_response_status
+      Origin IP: cloudflare_logs.origin_ip
+    row: 11
+    col: 19
+    width: 4
+    height: 2
   filters:
   - name: Date
     title: Date
