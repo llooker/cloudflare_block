@@ -13,6 +13,8 @@ view: cloudflare_logs {
           (edgePathingSrc = 'user' AND edgePathingOp = 'ban' AND edgePathingStatus = 'zl') OR
           (edgePathingSrc = 'user' AND edgePathingOp = 'ban' AND edgePathingStatus = 'ua') OR
           (edgePathingSrc = 'user' AND edgePathingOp = 'ban' AND edgePathingStatus = 'rateLimit') OR
+          (edgePathingSrc = 'filterBasedFirewall' AND edgePathingOp = 'ban' AND edgePathingStatus = 'unknown') OR
+          (edgePathingSrc = 'filterBasedFirewall' AND edgePathingOp = 'chl') OR
           (edgePathingSrc = 'user' AND edgePathingOp = 'ban' AND edgePathingStatus = 'ctry') OR
           (edgePathingSrc = 'user' AND edgePathingOp = 'ban' AND edgePathingStatus = 'ip') OR
           (edgePathingSrc = 'user' AND edgePathingOp = 'ban' AND edgePathingStatus IN ('ipr16', 'ipr24', 'ip6', 'ip6r64', 'ip6r48', 'ip6r32'));;
@@ -35,6 +37,8 @@ view: cloudflare_logs {
                when ${edge_pathing_src}='user' AND ${edge_pathing_op}='ban' AND ${edge_pathing_status}='zl' then 'routed by zone lockdown'
                when ${edge_pathing_src}='user' AND ${edge_pathing_op}='ban' AND ${edge_pathing_status}='ua' then 'blocked user agent'
                when ${edge_pathing_src}='user' AND ${edge_pathing_op}='ban' AND ${edge_pathing_status}='rateLimit' then 'rate-limiting rule'
+              when ${edge_pathing_src}='filterBasedFirewall' AND ${edge_pathing_op}='ban' AND ${edge_pathing_status}='unknown' then 'blocked by filter based firewall'
+              when ${edge_pathing_src}='filterBasedFirewall' AND ${edge_pathing_op}='chl' then 'challenged by filter based firewall'
                when ${edge_pathing_src}='bic' AND ${edge_pathing_op}='ban' AND ${edge_pathing_status}='unknown' then 'browser integrity check'
                when ${edge_pathing_src}='hot' AND ${edge_pathing_op}='ban' AND ${edge_pathing_status}='unknown' then 'blocked hotlink'
                when ${edge_pathing_src}='macro' AND ${edge_pathing_op}='chl' AND ${edge_pathing_status}='captchaFail' then 'CAPTCHA challenge failed'
