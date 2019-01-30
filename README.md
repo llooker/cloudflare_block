@@ -22,9 +22,12 @@ Make sure you have a Looker account up and running. If you are using BigQuery, p
 
 
 ## Learn more
-[Cloudflare Analytics](https://support.cloudflare.com/hc/en-us/sections/200820478-General)
+[Cloudflare Enterprise Logs](https://developers.cloudflare.com/logs/)
 
-[Cloudflare Enterprise logs](https://support.cloudflare.com/hc/en-us/sections/200820208-Logs)
+[Glossary](https://developers.cloudflare.com/logs/reference/glossary/)
+
+[Pathing Status](https://developers.cloudflare.com/logs/reference/pathing-status/)
+
 
 ## What if I find an error or discrepancy? Suggestions for improvements?
 If you have feedback for improvements or find any errors, feel free to create a "New Issue" in the github repository for this Cloudflare Block.
