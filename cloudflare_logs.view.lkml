@@ -20,6 +20,19 @@ view: cloudflare_logs {
           (edgePathingSrc = 'user' AND edgePathingOp = 'ban' AND edgePathingStatus IN ('ipr16', 'ipr24', 'ip6', 'ip6r64', 'ip6r48', 'ip6r32'));;
   }
 
+
+  dimension: is_bot {
+    type: yesno
+    sql: (edgePathingSrc = 'filterBasedFirewall' AND edgePathingStatus = 'captchaNew');;
+    group_label: "Bot"
+  }
+
+    dimension: is_false_detected_bot {
+    type: yesno
+    sql: (edgePathingSrc = 'filterBasedFirewall' AND edgePathingStatus = 'captchaSucc');;
+    group_label: "Bot"
+  }
+
   dimension: is_dynamic {
     type: yesno
     sql: ${cache_cache_status} IN ("bypass", "unknown") ;;
@@ -99,7 +112,7 @@ view: cloudflare_logs {
   }
 
   dimension: client_asn {
-    type: number
+    type: string
     sql: ${TABLE}.ClientASN ;;
     group_label: "Client"
   }
@@ -578,6 +591,35 @@ view: cloudflare_logs {
     drill_fields: [default*]
     label: "Requests"
     }
+
+  measure: bot_count {
+    type: count
+    filters: {
+      field: is_bot
+      value: "yes"
+    }
+    drill_fields: [default*]
+    label: "bot count"
+  }
+
+  measure: false_bot_count {
+    type: count
+    filters: {
+      field: is_false_detected_bot
+      value: "yes"
+    }
+    drill_fields: [default*]
+    label: "false bot count"
+  }
+
+  measure: bad_bot_count {
+    type: number
+    sql: ${bot_count} - ${false_bot_count} ;;
+    value_format_name: decimal_0
+    drill_fields: [default*]
+    label: "bad bot count"
+  }
+
 
   measure: avg_rps_15m {
     type: number
