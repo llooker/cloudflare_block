@@ -43,6 +43,21 @@ view: cloudflare_logs {
     sql: ${cache_cache_status} NOT IN ("bypass", "unknown") ;;
   }
 
+  dimension: is_cache_status_hit_r {
+    type: yesno
+    sql: ${cache_cache_status} IN ("hit", "stale", "updating") ;;
+  }
+
+  dimension: is_cache_status_hit_b {
+    type: yesno
+    sql: ${cache_cache_status} IN ("hit", "stale", "updating", "revalidated") ;;
+  }
+
+  dimension: is_cache_status_not_in_bypass_unknown {
+    type: yesno
+    sql: ${cache_cache_status} NOT IN ("bypass", "unknown") ;;
+  }
+
   dimension: edgepathingstatus_full {
     type: string
     sql:  case when ${edge_pathing_src}='user' AND ${edge_pathing_op}='ban' AND ${edge_pathing_status}='ip' then 'ip block'
@@ -621,6 +636,47 @@ view: cloudflare_logs {
   }
 
 
+  measure: cache_status_hit_r_count {
+    type: count
+    filters: {
+      field: is_cache_status_hit_r
+      value: "yes"
+    }
+    drill_fields: [default*]
+  }
+
+  measure: cache_status_hit_b_count {
+    type: count
+    filters: {
+      field: is_cache_status_hit_b
+      value: "yes"
+    }
+    drill_fields: [default*]
+  }
+
+  measure: cache_status_not_in_bypass_unknown_count {
+    type: count
+    filters: {
+      field: is_cache_status_not_in_bypass_unknown
+      value: "yes"
+    }
+    drill_fields: [default*]
+  }
+
+  measure: cache_hit_rate_r {
+    type: number
+    sql: ${cache_status_hit_r_count} / ${cache_status_not_in_bypass_unknown_count} ;;
+    value_format_name: percent_2
+    label: "cache hit rate requests"
+  }
+
+  measure: cache_hit_rate_b {
+    type: number
+    sql: ${cache_status_hit_b_count} / ${cache_status_not_in_bypass_unknown_count} ;;
+    value_format_name: percent_2
+    label: "cache hit rate bandwidth"
+  }
+
   measure: avg_rps_15m {
     type: number
     sql: count(*) / (60*15) ;;
@@ -821,10 +877,10 @@ view: cloudflare_logs {
       value: "yes"
     }
     value_format: "[>=1000000000]0.0,,,\"e9\";[>=1000000]0.0,,,\"e6\";[>=1000]0.0,,,\"e3 \";0.00"
-    html: {% if value > 1099511627776 %} {{ value | divided_by: 1099511627776.0 | round: 2}} TiB
-          {% elsif value > 1073741824 %} {{ value | divided_by: 1073741824.0 | round: 2}} GiB
-          {% elsif value > 1048576 %} {{ value | divided_by: 1048576.0 | round: 2}} MiB
-          {% elsif value > 1024 %} {{ value | divided_by: 1024.0 | round: 2}} KiB
+    html: {% if value > 1099511627776 %} {{ value | divided_by: 1099511627776.0 | round: 2}} TB
+          {% elsif value > 1073741824 %} {{ value | divided_by: 1073741824.0 | round: 2}} GB
+          {% elsif value > 1048576 %} {{ value | divided_by: 1048576.0 | round: 2}} MB
+          {% elsif value > 1024 %} {{ value | divided_by: 1024.0 | round: 2}} KB
           {% else %} {{value | round: 2}} bytes {% endif %} ;;
   }
 
