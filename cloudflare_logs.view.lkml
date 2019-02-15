@@ -617,6 +617,7 @@ view: cloudflare_logs {
     label: "bot count"
   }
 
+
   measure: false_bot_count {
     type: count
     filters: {
