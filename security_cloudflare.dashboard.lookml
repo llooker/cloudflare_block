@@ -385,94 +385,6 @@
     col: 16
     width: 7
     height: 5
-  - title: Threats Over Time
-    name: Threats Over Time
-    model: cloudflare_looker
-    explore: cloudflare_logs
-    type: looker_line
-    fields:
-    - cloudflare_logs.count
-    - cloudflare_logs.edge_start_timestamp_hour
-    - cloudflare_logs.edge_pathing_status
-    pivots:
-    - cloudflare_logs.edge_pathing_status
-    fill_fields:
-    - cloudflare_logs.edge_start_timestamp_hour
-    filters:
-      cloudflare_logs.is_threat: 'Yes'
-    sorts:
-    - cloudflare_logs.count desc 0
-    - cloudflare_logs.edge_pathing_status
-    limit: 500
-    query_timezone: America/Los_Angeles
-    stacking: normal
-    show_value_labels: false
-    label_density: 25
-    legend_position: right
-    x_axis_gridlines: true
-    y_axis_gridlines: true
-    show_view_names: false
-    point_style: none
-    series_types: {}
-    limit_displayed_rows: false
-    y_axes:
-    - label: ''
-      orientation: left
-      series:
-      - id: ctry - camiliame_logs.count
-        name: ctry
-        axisId: cloudflare_logs.count
-      - id: ip - camiliame_logs.count
-        name: ip
-        axisId: cloudflare_logs.count
-      - id: rateLimit - camiliame_logs.count
-        name: rateLimit
-        axisId: cloudflare_logs.count
-      - id: ua - camiliame_logs.count
-        name: ua
-        axisId: cloudflare_logs.count
-      - id: unknown - camiliame_logs.count
-        name: unknown
-        axisId: cloudflare_logs.count
-      - id: zl - camiliame_logs.count
-        name: zl
-        axisId: cloudflare_logs.count
-      showLabels: true
-      showValues: true
-      unpinAxis: false
-      tickDensity: default
-      tickDensityCustom: 5
-      type: linear
-    y_axis_combined: true
-    show_y_axis_labels: true
-    show_y_axis_ticks: true
-    y_axis_tick_density: default
-    y_axis_tick_density_custom: 5
-    show_x_axis_label: true
-    show_x_axis_ticks: true
-    x_axis_scale: auto
-    y_axis_scale_mode: linear
-    x_axis_reversed: false
-    y_axis_reversed: false
-    plot_size_by_field: false
-    show_null_points: true
-    interpolation: linear
-    hidden_fields: []
-    listen:
-      Date: cloudflare_logs.edge_start_timestamp_hour
-      Device Type: cloudflare_logs.client_device_type
-      Country: cloudflare_logs.client_country_code
-      Client IP: cloudflare_logs.client_ip
-      Hostname: cloudflare_logs.client_request_host
-      Request URI: cloudflare_logs.client_request_uri
-      Origin Response Status: cloudflare_logs.origin_response_status
-      Edge Response Status: cloudflare_logs.edge_response_status
-      Origin IP: cloudflare_logs.origin_ip
-      User Agent: cloudflare_logs.client_request_user_agent
-    row: 10
-    col: 1
-    width: 22
-    height: 5
   - title: WAF Events Over Time
     name: WAF Events Over Time
     model: cloudflare_looker
@@ -828,88 +740,6 @@
     col: 1
     width: 8
     height: 6
-  - title: Top Rate Limit Countries
-    name: Top Rate Limit Countries
-    model: cloudflare_looker
-    explore: cloudflare_logs
-    type: table
-    fields:
-    - countries.country_name
-    - cloudflare_logs.client_request_host
-    - cloudflare_logs.count
-    - cloudflare_logs.edge_rate_limit_action
-    filters:
-      cloudflare_logs.edge_rate_limit_action: ban,simulate
-    sorts:
-    - cloudflare_logs.count desc
-    limit: 500
-    column_limit: 50
-    query_timezone: America/Los_Angeles
-    show_view_names: false
-    show_row_numbers: true
-    truncate_column_names: false
-    subtotals_at_bottom: false
-    hide_totals: false
-    hide_row_totals: false
-    table_theme: gray
-    limit_displayed_rows: false
-    enable_conditional_formatting: false
-    conditional_formatting_include_totals: false
-    conditional_formatting_include_nulls: false
-    stacking: normal
-    show_value_labels: false
-    label_density: 25
-    legend_position: right
-    x_axis_gridlines: true
-    y_axis_gridlines: true
-    point_style: none
-    series_types: {}
-    y_axes:
-    - label: ''
-      orientation: left
-      series:
-      - id: ban - camiliame_logs.count
-        name: ban
-        axisId: cloudflare_logs.count
-      - id: simulate - camiliame_logs.count
-        name: simulate
-        axisId: cloudflare_logs.count
-      showLabels: true
-      showValues: true
-      unpinAxis: false
-      tickDensity: default
-      tickDensityCustom: 5
-      type: linear
-    y_axis_combined: true
-    show_y_axis_labels: true
-    show_y_axis_ticks: true
-    y_axis_tick_density: default
-    y_axis_tick_density_custom: 5
-    show_x_axis_label: true
-    show_x_axis_ticks: true
-    x_axis_scale: auto
-    y_axis_scale_mode: linear
-    x_axis_reversed: false
-    y_axis_reversed: false
-    plot_size_by_field: false
-    show_null_points: true
-    interpolation: linear
-    hidden_fields: []
-    listen:
-      Date: cloudflare_logs.edge_start_timestamp_hour
-      Device Type: cloudflare_logs.client_device_type
-      Country: cloudflare_logs.client_country_code
-      Client IP: cloudflare_logs.client_ip
-      Hostname: cloudflare_logs.client_request_host
-      Request URI: cloudflare_logs.client_request_uri
-      Origin Response Status: cloudflare_logs.origin_response_status
-      Edge Response Status: cloudflare_logs.edge_response_status
-      Origin IP: cloudflare_logs.origin_ip
-      User Agent: cloudflare_logs.client_request_user_agent
-    row: 39
-    col: 6
-    width: 6
-    height: 4
   - title: Top Rate Limit Actions
     name: Top Rate Limit Actions
     model: cloudflare_looker
@@ -989,6 +819,164 @@
       User Agent: cloudflare_logs.client_request_user_agent
     row: 39
     col: 1
+    width: 5
+    height: 4
+  - title: Rate Limit Over Time
+    name: Rate Limit Over Time
+    model: cloudflare_looker
+    explore: cloudflare_logs
+    type: looker_line
+    fields:
+    - cloudflare_logs.count
+    - cloudflare_logs.edge_rate_limit_action
+    - cloudflare_logs.edge_start_timestamp_date
+    pivots:
+    - cloudflare_logs.edge_rate_limit_action
+    fill_fields:
+    - cloudflare_logs.edge_start_timestamp_date
+    filters:
+      cloudflare_logs.edge_rate_limit_action: "-EMPTY"
+    sorts:
+    - cloudflare_logs.count desc 0
+    - cloudflare_logs.edge_rate_limit_action
+    limit: 500
+    column_limit: 50
+    query_timezone: America/Los_Angeles
+    stacking: normal
+    show_value_labels: false
+    label_density: 25
+    legend_position: right
+    x_axis_gridlines: true
+    y_axis_gridlines: true
+    show_view_names: false
+    point_style: none
+    series_types: {}
+    limit_displayed_rows: false
+    y_axes:
+    - label: ''
+      orientation: left
+      series:
+      - id: ban - camiliame_logs.count
+        name: ban
+        axisId: cloudflare_logs.count
+      - id: simulate - camiliame_logs.count
+        name: simulate
+        axisId: cloudflare_logs.count
+      showLabels: true
+      showValues: true
+      unpinAxis: false
+      tickDensity: default
+      tickDensityCustom: 5
+      type: linear
+    y_axis_combined: true
+    show_y_axis_labels: true
+    show_y_axis_ticks: true
+    y_axis_tick_density: default
+    y_axis_tick_density_custom: 5
+    show_x_axis_label: true
+    show_x_axis_ticks: true
+    x_axis_scale: auto
+    y_axis_scale_mode: linear
+    x_axis_reversed: false
+    y_axis_reversed: false
+    plot_size_by_field: false
+    show_null_points: true
+    interpolation: linear
+    hidden_fields: []
+    listen:
+      Date: cloudflare_logs.edge_start_timestamp_hour
+      Device Type: cloudflare_logs.client_device_type
+      Country: cloudflare_logs.client_country_code
+      Client IP: cloudflare_logs.client_ip
+      Hostname: cloudflare_logs.client_request_host
+      Request URI: cloudflare_logs.client_request_uri
+      Origin Response Status: cloudflare_logs.origin_response_status
+      Edge Response Status: cloudflare_logs.edge_response_status
+      Origin IP: cloudflare_logs.origin_ip
+      User Agent: cloudflare_logs.client_request_user_agent
+    row: 34
+    col: 1
+    width: 22
+    height: 5
+  - title: Top Banned URIs
+    name: Top Banned URIs
+    model: cloudflare_looker
+    explore: cloudflare_logs
+    type: table
+    fields:
+    - cloudflare_logs.client_request_uri
+    - cloudflare_logs.client_request_host
+    - cloudflare_logs.count
+    filters:
+      cloudflare_logs.edge_rate_limit_action: ban
+    sorts:
+    - cloudflare_logs.count desc
+    limit: 500
+    column_limit: 50
+    query_timezone: America/Los_Angeles
+    show_view_names: false
+    show_row_numbers: true
+    truncate_column_names: false
+    subtotals_at_bottom: false
+    hide_totals: false
+    hide_row_totals: false
+    table_theme: gray
+    limit_displayed_rows: false
+    enable_conditional_formatting: false
+    conditional_formatting_include_totals: false
+    conditional_formatting_include_nulls: false
+    stacking: normal
+    show_value_labels: false
+    label_density: 25
+    legend_position: right
+    x_axis_gridlines: true
+    y_axis_gridlines: true
+    point_style: none
+    series_types: {}
+    y_axes:
+    - label: ''
+      orientation: left
+      series:
+      - id: ban - camiliame_logs.count
+        name: ban
+        axisId: cloudflare_logs.count
+      - id: simulate - camiliame_logs.count
+        name: simulate
+        axisId: cloudflare_logs.count
+      showLabels: true
+      showValues: true
+      unpinAxis: false
+      tickDensity: default
+      tickDensityCustom: 5
+      type: linear
+    y_axis_combined: true
+    show_y_axis_labels: true
+    show_y_axis_ticks: true
+    y_axis_tick_density: default
+    y_axis_tick_density_custom: 5
+    show_x_axis_label: true
+    show_x_axis_ticks: true
+    x_axis_scale: auto
+    y_axis_scale_mode: linear
+    x_axis_reversed: false
+    y_axis_reversed: false
+    plot_size_by_field: false
+    show_null_points: true
+    interpolation: linear
+    hidden_fields: []
+    listen:
+      Date: cloudflare_logs.edge_start_timestamp_hour
+      Device Type: cloudflare_logs.client_device_type
+      Country: cloudflare_logs.client_country_code
+      Client IP: cloudflare_logs.client_ip
+      Hostname: cloudflare_logs.client_request_host
+      Request URI: cloudflare_logs.client_request_uri
+      Origin Response Status: cloudflare_logs.origin_response_status
+      Edge Response Status: cloudflare_logs.edge_response_status
+      Origin IP: cloudflare_logs.origin_ip
+      User Agent: cloudflare_logs.client_request_user_agent
+    row: 39
+    col: 18
     width: 5
     height: 4
   - title: Top Banned Client IPs
@@ -1072,17 +1060,18 @@
     col: 12
     width: 6
     height: 4
-  - title: Top Banned URIs
-    name: Top Banned URIs
+  - title: Top Rate Limit Countries
+    name: Top Rate Limit Countries
     model: cloudflare_looker
     explore: cloudflare_logs
     type: table
     fields:
-    - cloudflare_logs.client_request_uri
+    - countries.country_name
     - cloudflare_logs.client_request_host
     - cloudflare_logs.count
+    - cloudflare_logs.edge_rate_limit_action
     filters:
-      cloudflare_logs.edge_rate_limit_action: ban
+      cloudflare_logs.edge_rate_limit_action: ban,simulate
     sorts:
     - cloudflare_logs.count desc
     limit: 500
@@ -1150,29 +1139,27 @@
       Origin IP: cloudflare_logs.origin_ip
       User Agent: cloudflare_logs.client_request_user_agent
     row: 39
-    col: 18
-    width: 5
+    col: 6
+    width: 6
     height: 4
-  - title: Rate Limit Over Time
-    name: Rate Limit Over Time
+  - title: Threats Over Time
+    name: Threats Over Time
     model: cloudflare_looker
     explore: cloudflare_logs
     type: looker_line
     fields:
     - cloudflare_logs.count
-    - cloudflare_logs.edge_rate_limit_action
-    - cloudflare_logs.edge_start_timestamp_date
+    - cloudflare_logs.edge_start_timestamp_hour
+    - cloudflare_logs.edgepathingstatus_full
     pivots:
-    - cloudflare_logs.edge_rate_limit_action
+    - cloudflare_logs.edgepathingstatus_full
     fill_fields:
-    - cloudflare_logs.edge_start_timestamp_date
+    - cloudflare_logs.edge_start_timestamp_hour
     filters:
-      cloudflare_logs.edge_rate_limit_action: "-EMPTY"
+      cloudflare_logs.is_threat: 'Yes'
     sorts:
     - cloudflare_logs.count desc 0
-    - cloudflare_logs.edge_rate_limit_action
     limit: 500
-    column_limit: 50
     query_timezone: America/Los_Angeles
     stacking: normal
     show_value_labels: false
@@ -1188,11 +1175,23 @@
     - label: ''
       orientation: left
       series:
-      - id: ban - camiliame_logs.count
-        name: ban
+      - id: ctry - camiliame_logs.count
+        name: ctry
         axisId: cloudflare_logs.count
-      - id: simulate - camiliame_logs.count
-        name: simulate
+      - id: ip - camiliame_logs.count
+        name: ip
+        axisId: cloudflare_logs.count
+      - id: rateLimit - camiliame_logs.count
+        name: rateLimit
+        axisId: cloudflare_logs.count
+      - id: ua - camiliame_logs.count
+        name: ua
+        axisId: cloudflare_logs.count
+      - id: unknown - camiliame_logs.count
+        name: unknown
+        axisId: cloudflare_logs.count
+      - id: zl - camiliame_logs.count
+        name: zl
         axisId: cloudflare_logs.count
       showLabels: true
       showValues: true
@@ -1226,7 +1225,7 @@
       Edge Response Status: cloudflare_logs.edge_response_status
       Origin IP: cloudflare_logs.origin_ip
       User Agent: cloudflare_logs.client_request_user_agent
-    row: 34
+    row: 10
     col: 1
     width: 22
     height: 5
