@@ -41,6 +41,8 @@ Please note that there are still some features that are missing in Cloudflare En
 
 
 ## Fields
+In these reports we use all available ELS fields.
+
 This default field set may change at any time. The full list of all available fields can be found by running the following Cloudflare logs API call:
 
 `https://api.cloudflare.com/client/v4/zones/<zone_tag>/logs/received/fields`
