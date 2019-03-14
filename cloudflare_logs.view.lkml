@@ -5,16 +5,16 @@ view: cloudflare_logs {
   dimension: is_threat {
     type: yesno
     sql: (edgePathingSrc = 'bic' AND edgePathingOp = 'ban' AND edgePathingStatus = 'unknown') OR
-          (edgePathingSrc = 'hot' AND edgePathingOp = 'ban' AND edgePathingStatus = 'unknown') OR
-          (edgePathingSrc = 'hot' AND edgePathingOp = 'ban' AND edgePathingStatus = 'ip') OR
+          (edgePathingSrc = 'hot' AND edgePathingOp = 'ban' AND edgePathingStatus IN ('unknown', 'ip')) OR
           (edgePathingSrc = 'macro' AND edgePathingOp = 'ban' AND edgePathingStatus = 'unknown') OR
-          (edgePathingSrc = 'macro' AND edgePathingOp = 'chl' AND edgePathingStatus = 'captchaFail') OR
-          (edgePathingSrc = 'macro' AND edgePathingOp = 'chl' AND edgePathingStatus ='jschlFail') OR
+          (edgePathingSrc = 'macro' AND edgePathingOp = 'chl' AND edgePathingStatus IN ('captchaFail', 'captchaErr', 'captchaNew')) OR
+          (edgePathingSrc = 'macro' AND edgePathingOp = 'chl' AND edgePathingStatus IN ('jschlFail', 'jschlErr', 'jschlNew')) OR
           (edgePathingSrc = 'user' AND edgePathingOp = 'ban' AND edgePathingStatus = 'zl') OR
           (edgePathingSrc = 'user' AND edgePathingOp = 'ban' AND edgePathingStatus = 'ua') OR
           (edgePathingSrc = 'user' AND edgePathingOp = 'ban' AND edgePathingStatus = 'rateLimit') OR
           (edgePathingSrc = 'filterBasedFirewall' AND edgePathingOp = 'ban' AND edgePathingStatus = 'unknown') OR
           (edgePathingSrc = 'filterBasedFirewall' AND edgePathingOp = 'chl') OR
+          (edgePathingSrc = 'protect' AND edgePathingOp = 'ban' AND edgePathingStatus = 'l7ddos') OR
           (edgePathingSrc = 'user' AND edgePathingOp = 'ban' AND edgePathingStatus = 'ctry') OR
           (edgePathingSrc = 'user' AND edgePathingOp = 'ban' AND edgePathingStatus = 'ip') OR
           (edgePathingSrc = 'user' AND edgePathingOp = 'ban' AND edgePathingStatus IN ('ipr16', 'ipr24', 'ip6', 'ip6r64', 'ip6r48', 'ip6r32'));;
@@ -60,17 +60,30 @@ view: cloudflare_logs {
 
   dimension: edgepathingstatus_full {
     type: string
-    sql:  case when ${edge_pathing_src}='user' AND ${edge_pathing_op}='ban' AND ${edge_pathing_status}='ip' then 'ip block'
-               when ${edge_pathing_src}='user' AND ${edge_pathing_op}='ban' AND ${edge_pathing_status}='ctry' then 'country block'
-               when ${edge_pathing_src}='user' AND ${edge_pathing_op}='ban' AND ${edge_pathing_status}='zl' then 'routed by zone lockdown'
-               when ${edge_pathing_src}='user' AND ${edge_pathing_op}='ban' AND ${edge_pathing_status}='ua' then 'blocked user agent'
-               when ${edge_pathing_src}='user' AND ${edge_pathing_op}='ban' AND ${edge_pathing_status}='rateLimit' then 'rate-limiting rule'
-              when ${edge_pathing_src}='filterBasedFirewall' AND ${edge_pathing_op}='ban' AND ${edge_pathing_status}='unknown' then 'blocked by filter based firewall'
-              when ${edge_pathing_src}='filterBasedFirewall' AND ${edge_pathing_op}='chl' then 'challenged by filter based firewall'
-               when ${edge_pathing_src}='bic' AND ${edge_pathing_op}='ban' AND ${edge_pathing_status}='unknown' then 'browser integrity check'
-               when ${edge_pathing_src}='hot' AND ${edge_pathing_op}='ban' AND ${edge_pathing_status}='unknown' then 'blocked hotlink'
-               when ${edge_pathing_src}='macro' AND ${edge_pathing_op}='chl' AND ${edge_pathing_status}='captchaFail' then 'CAPTCHA challenge failed'
-               when ${edge_pathing_src}= 'macro' AND ${edge_pathing_op}='chl' AND ${edge_pathing_status}='jschlFail' then 'java script challenge failed'
+    sql:  case when ${edge_pathing_src}='user' AND ${edge_pathing_op}='ban' AND ${edge_pathing_status}='ip' then 'IP Block'
+               when ${edge_pathing_src}='user' AND ${edge_pathing_op}='ban' AND ${edge_pathing_status}='ctry' then 'Country Block'
+               when ${edge_pathing_src}='user' AND ${edge_pathing_op}='ban' AND ${edge_pathing_status}='zl' then 'Routed by Zone Lockdown'
+               when ${edge_pathing_src}='user' AND ${edge_pathing_op}='ban' AND ${edge_pathing_status}='ua' then 'Blocked User Agent'
+               when ${edge_pathing_src}='user' AND ${edge_pathing_op}='ban' AND ${edge_pathing_status}='rateLimit' then 'Blocked by Rate Limiting'
+               when ${edge_pathing_src}='filterBasedFirewall' AND ${edge_pathing_op}='ban' AND ${edge_pathing_status}='unknown' then 'Blocked by Filter Based Firewall'
+               when ${edge_pathing_src}='filterBasedFirewall' AND ${edge_pathing_op}='chl' then 'Challenged by Filter Based Firewall'
+               when ${edge_pathing_src}='bic' AND ${edge_pathing_op}='ban' AND ${edge_pathing_status}='unknown' then 'Browser Integrity Check'
+               when ${edge_pathing_src}='hot' AND ${edge_pathing_op}='ban' AND ${edge_pathing_status}='unknown' then 'Blocked Hotlink'
+               when ${edge_pathing_src}='hot' AND ${edge_pathing_op}='ban' AND ${edge_pathing_status}='ip' then 'Blocked Hotlink'
+               when ${edge_pathing_src}='macro' AND ${edge_pathing_op}='ban' AND ${edge_pathing_status}='unknown' then 'Bad IP'
+               when ${edge_pathing_src}='macro' AND ${edge_pathing_op}='chl' AND ${edge_pathing_status}='captchaErr' then 'CAPTCHA Error'
+               when ${edge_pathing_src}='macro' AND ${edge_pathing_op}='chl' AND ${edge_pathing_status}='captchaFail' then 'CAPTCHA Challenge Failed'
+               when ${edge_pathing_src}='macro' AND ${edge_pathing_op}='chl' AND ${edge_pathing_status}='captchaNew' then 'New CAPTCHA'
+               when ${edge_pathing_src}='macro' AND ${edge_pathing_op}='chl' AND ${edge_pathing_status}='jschlErr' then 'Java Script Challenge Error'
+               when ${edge_pathing_src}='macro' AND ${edge_pathing_op}='chl' AND ${edge_pathing_status}='jschlFail' then 'Java Script Challenge Failed'
+               when ${edge_pathing_src}='macro' AND ${edge_pathing_op}='chl' AND ${edge_pathing_status}='jschlNew' then 'New Java Script Challenge'
+               when ${edge_pathing_src}='user' AND ${edge_pathing_op}='ban' AND ${edge_pathing_status}='ipr16' then 'IP Range block (/16)'
+               when ${edge_pathing_src}='user' AND ${edge_pathing_op}='ban' AND ${edge_pathing_status}='ipr24' then 'IP range block (/24)'
+               when ${edge_pathing_src}='user' AND ${edge_pathing_op}='ban' AND ${edge_pathing_status}='ipr6' then 'IPv6 Block'
+               when ${edge_pathing_src}='user' AND ${edge_pathing_op}='ban' AND ${edge_pathing_status}='ipr64' then 'IP range block (/64)'
+               when ${edge_pathing_src}='user' AND ${edge_pathing_op}='ban' AND ${edge_pathing_status}='ipr48' then 'IP range block (/48)'
+               when ${edge_pathing_src}='user' AND ${edge_pathing_op}='ban' AND ${edge_pathing_status}='ipr32' then 'IP range block (/32)'
+               when ${edge_pathing_src}='protect' AND ${edge_pathing_op}='ban' AND ${edge_pathing_status}='l7ddos' then 'L7 DDoS Mitigation'
       else ${edge_pathing_status}
       end ;;
     group_label: "Edge"

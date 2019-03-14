@@ -2,7 +2,11 @@
 
 ## How to implement this Block
 
-Make sure you have a Looker account up and running. If you are using BigQuery, please follow Looker instructions on how to connect Bigquery to Looker. Once it’s done you will need to go to the github repository and download the following files. You might consider to replace the connection name in the model file with yours. If you decided to rename explore, model name and view files name, please make sure to update it everywhere by “Find & replace” option.
+Make sure you have a Looker account up and running. If you are using BigQuery, please follow Looker instructions on how to connect Bigquery to Looker.Please be aware that certain syntax may need to be modified for alternate database connections. Once it’s done you will need to go to the github repository and download the files below. Once you downloaded the files, drag them into your LookML project, or copy and paste the text.
+
+You should replace the connection name in the model file with yours. All the table names need to be updated to the customer's table names as well. If you decided to rename the filenames of explore, model name and view, then please make sure to update all mentions within the other files, else this will result in errors.
+
+[More](https://docs.looker.com/data-modeling/getting-started/model-development)
 
 ###### LookML model:
 * cloudflare_looker
@@ -12,6 +16,7 @@ Make sure you have a Looker account up and running. If you are using BigQuery, p
 * reliability_cloudflare
 * security_cloudflare
 * snapshot_cloudflare
+* bot_management_cloudflare
 
 ###### Views:
 * cloudflare_logs
@@ -40,4 +45,4 @@ This default field set may change at any time. The full list of all available fi
 
 `https://api.cloudflare.com/client/v4/zones/<zone_tag>/logs/received/fields`
 
-It will return the list of all available fields with its definitions. Click [here](https://support.cloudflare.com/hc/en-us/articles/216672448-Enterprise-Log-Share-Logpull-REST-API) for more information on Cloudflare Enterprise Log Share.
+It will return the list of all available fields with its definitions. Click [here](https://developers.cloudflare.com/logs/) for more information on Cloudflare Enterprise Log Share.
