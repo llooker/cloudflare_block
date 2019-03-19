@@ -1,15 +1,16 @@
+
 - dashboard: bot_management_cloudflare
   title: Bot Management Cloudflare
   layout: newspaper
   elements:
-  - name: Bad Bots
+  - name: Bad Bots Text
     type: text
     title_text: Bad Bots
     row: 0
     col: 16
     width: 7
     height: 2
-  - name: <img src="https://www.cloudflare.com/img/logo-cloudflare-dark.svg">
+  - name: "Cloudflare logo"
     type: text
     title_text: <img src="https://www.cloudflare.com/img/logo-cloudflare-dark.svg">
     row: 0
@@ -443,7 +444,7 @@
     col: 16
     width: 7
     height: 2
-  - name: False Detected Bots
+  - name: False Detected Bots Text
     type: text
     title_text: False Detected Bots
     row: 0
@@ -1023,7 +1024,7 @@
     - cloudflare_logs.count
     - cloudflare_logs.bad_bot_count
     listen:
-      Date: cloudflare_logs.edge_start_timestamp_minute
+      Date: cloudflare_logs.edge_start_timestamp_hour
       Device Type: cloudflare_logs.client_device_type
       Country: countries.country_name
       Hostname: cloudflare_logs.client_request_host
@@ -1046,7 +1047,7 @@
     model: cloudflare_looker
     explore: cloudflare_logs
     listens_to_filters: []
-    field: cloudflare_logs.edge_start_timestamp_minute
+    field: cloudflare_logs.edge_start_timestamp_hour
   - name: Device Type
     title: Device Type
     type: field_filter
