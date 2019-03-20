@@ -2,215 +2,20 @@
   title: Bot Management Cloudflare
   layout: newspaper
   elements:
-  - name: Bad Bots
+  - name: Bad Bots Text
     type: text
     title_text: Bad Bots
     row: 0
     col: 16
     width: 7
     height: 2
-  - name: <img src="https://www.cloudflare.com/img/logo-cloudflare-dark.svg">
+  - name: "Cloudflare logo"
     type: text
     title_text: <img src="https://www.cloudflare.com/img/logo-cloudflare-dark.svg">
     row: 0
     col: 1
     width: 4
     height: 2
-  - title: Top Bad Bots IPs - AS Number - Country
-    name: Top Bad Bots IPs - AS Number - Country
-    model: cloudflare_looker
-    explore: cloudflare_logs
-    type: table
-    fields:
-    - cloudflare_logs.client_ip
-    - cloudflare_logs.client_asn
-    - countries.country_name
-    - cloudflare_logs.bad_bot_count
-    sorts:
-    - cloudflare_logs.bad_bot_count desc
-    limit: 500
-    column_limit: 50
-    query_timezone: America/Los_Angeles
-    show_view_names: false
-    show_row_numbers: true
-    truncate_column_names: false
-    subtotals_at_bottom: false
-    hide_totals: false
-    hide_row_totals: false
-    series_labels: {}
-    table_theme: gray
-    limit_displayed_rows: false
-    enable_conditional_formatting: true
-    conditional_formatting:
-    - type: along a scale...
-      value:
-      background_color:
-      font_color:
-      color_application:
-        collection_id: legacy
-        custom:
-          id: 748995a5-96c2-bbb5-e5f1-1c0f40d1b267
-          label: Custom
-          type: continuous
-          stops:
-          - color: "#FFCCCC"
-            offset: 0
-          - color: "#FF6666"
-            offset: 100
-        options:
-          steps: 5
-          reverse: false
-      bold: false
-      italic: false
-      strikethrough: false
-      fields:
-    conditional_formatting_include_totals: false
-    conditional_formatting_include_nulls: false
-    series_types: {}
-    hidden_fields: []
-    y_axes: []
-    listen:
-      Date: cloudflare_logs.edge_start_timestamp_hour
-      Device Type: cloudflare_logs.client_device_type
-      Country: countries.country_name
-      Hostname: cloudflare_logs.client_request_host
-      IP address: cloudflare_logs.client_ip
-      User Agent: cloudflare_logs.client_request_user_agent
-      Edge Response Status: cloudflare_logs.edge_response_status
-      Origin Response Code: cloudflare_logs.origin_response_status
-      Request URI: cloudflare_logs.client_request_uri
-    row: 14
-    col: 16
-    width: 7
-    height: 4
-  - title: Top Bad Bots Requested URIs
-    name: Top Bad Bots Requested URIs
-    model: cloudflare_looker
-    explore: cloudflare_logs
-    type: table
-    fields:
-    - cloudflare_logs.client_request_uri_wrap
-    - cloudflare_logs.bad_bot_count
-    sorts:
-    - cloudflare_logs.bad_bot_count desc
-    limit: 500
-    column_limit: 50
-    query_timezone: America/Los_Angeles
-    show_view_names: false
-    show_row_numbers: true
-    truncate_column_names: false
-    subtotals_at_bottom: false
-    hide_totals: false
-    hide_row_totals: false
-    series_labels: {}
-    table_theme: gray
-    limit_displayed_rows: false
-    enable_conditional_formatting: true
-    conditional_formatting:
-    - type: along a scale...
-      value:
-      background_color:
-      font_color:
-      color_application:
-        collection_id: legacy
-        custom:
-          id: 9667199d-55f8-afdf-820b-3283410cc52d
-          label: Custom
-          type: continuous
-          stops:
-          - color: "#FFCCCC"
-            offset: 0
-          - color: "#F36254"
-            offset: 100
-        options:
-          steps: 5
-      bold: false
-      italic: false
-      strikethrough: false
-      fields:
-    conditional_formatting_include_totals: false
-    conditional_formatting_include_nulls: false
-    series_types: {}
-    hidden_fields: []
-    y_axes: []
-    listen:
-      Date: cloudflare_logs.edge_start_timestamp_hour
-      Device Type: cloudflare_logs.client_device_type
-      Country: countries.country_name
-      Hostname: cloudflare_logs.client_request_host
-      IP address: cloudflare_logs.client_ip
-      User Agent: cloudflare_logs.client_request_user_agent
-      Edge Response Status: cloudflare_logs.edge_response_status
-      Origin Response Code: cloudflare_logs.origin_response_status
-      Request URI: cloudflare_logs.client_request_uri
-    row: 18
-    col: 16
-    width: 7
-    height: 4
-  - title: Top Bad Bots Requested User Agents
-    name: Top Bad Bots Requested User Agents
-    model: cloudflare_looker
-    explore: cloudflare_logs
-    type: table
-    fields:
-    - cloudflare_logs.client_request_user_agent_wrap
-    - cloudflare_logs.bad_bot_count
-    sorts:
-    - cloudflare_logs.bad_bot_count desc
-    limit: 500
-    column_limit: 50
-    query_timezone: America/Los_Angeles
-    show_view_names: false
-    show_row_numbers: true
-    truncate_column_names: false
-    subtotals_at_bottom: false
-    hide_totals: false
-    hide_row_totals: false
-    series_labels: {}
-    table_theme: gray
-    limit_displayed_rows: false
-    enable_conditional_formatting: true
-    conditional_formatting:
-    - type: along a scale...
-      value:
-      background_color:
-      font_color:
-      color_application:
-        collection_id: legacy
-        custom:
-          id: ecefef80-4726-70e9-f9c6-b6a4e1c5a4be
-          label: Custom
-          type: continuous
-          stops:
-          - color: "#FFCCCC"
-            offset: 0
-          - color: "#F36254"
-            offset: 100
-        options:
-          steps: 5
-      bold: false
-      italic: false
-      strikethrough: false
-      fields:
-    conditional_formatting_include_totals: false
-    conditional_formatting_include_nulls: false
-    series_types: {}
-    hidden_fields: []
-    y_axes: []
-    listen:
-      Date: cloudflare_logs.edge_start_timestamp_hour
-      Device Type: cloudflare_logs.client_device_type
-      Country: countries.country_name
-      Hostname: cloudflare_logs.client_request_host
-      IP address: cloudflare_logs.client_ip
-      User Agent: cloudflare_logs.client_request_user_agent
-      Edge Response Status: cloudflare_logs.edge_response_status
-      Origin Response Code: cloudflare_logs.origin_response_status
-      Request URI: cloudflare_logs.client_request_uri
-    row: 22
-    col: 16
-    width: 7
-    height: 4
   - title: Total Number of requests
     name: Total Number of requests
     model: cloudflare_looker
@@ -443,7 +248,7 @@
     col: 16
     width: 7
     height: 2
-  - name: False Detected Bots
+  - name: False Detected Bots Text
     type: text
     title_text: False Detected Bots
     row: 0
@@ -451,7 +256,7 @@
     width: 7
     height: 2
   - title: False Detected Bots
-    name: False Detected Bots
+    name: False Detected Bots Text
     model: cloudflare_looker
     explore: cloudflare_logs
     type: single_value
@@ -635,71 +440,6 @@
     col: 9
     width: 7
     height: 4
-  - title: Top Bad Bots Referer
-    name: Top Bad Bots Referer
-    model: cloudflare_looker
-    explore: cloudflare_logs
-    type: table
-    fields:
-    - cloudflare_logs.bad_bot_count
-    - cloudflare_logs.client_request_referer_wrap
-    filters: {}
-    sorts:
-    - cloudflare_logs.bad_bot_count desc
-    limit: 500
-    column_limit: 50
-    query_timezone: America/Los_Angeles
-    show_view_names: false
-    show_row_numbers: true
-    truncate_column_names: false
-    subtotals_at_bottom: false
-    hide_totals: false
-    hide_row_totals: false
-    series_labels: {}
-    table_theme: gray
-    limit_displayed_rows: false
-    enable_conditional_formatting: true
-    conditional_formatting:
-    - type: along a scale...
-      value:
-      background_color:
-      font_color:
-      color_application:
-        collection_id: legacy
-        custom:
-          id: ecefef80-4726-70e9-f9c6-b6a4e1c5a4be
-          label: Custom
-          type: continuous
-          stops:
-          - color: "#FFCCCC"
-            offset: 0
-          - color: "#F36254"
-            offset: 100
-        options:
-          steps: 5
-      bold: false
-      italic: false
-      strikethrough: false
-      fields:
-    conditional_formatting_include_totals: false
-    conditional_formatting_include_nulls: false
-    series_types: {}
-    hidden_fields: []
-    y_axes: []
-    listen:
-      Date: cloudflare_logs.edge_start_timestamp_hour
-      Device Type: cloudflare_logs.client_device_type
-      Country: countries.country_name
-      Hostname: cloudflare_logs.client_request_host
-      IP address: cloudflare_logs.client_ip
-      User Agent: cloudflare_logs.client_request_user_agent
-      Edge Response Status: cloudflare_logs.edge_response_status
-      Origin Response Code: cloudflare_logs.origin_response_status
-      Request URI: cloudflare_logs.client_request_uri
-    row: 26
-    col: 16
-    width: 7
-    height: 5
   - title: Top False Detected Bots Referer
     name: Top False Detected Bots Referer
     model: cloudflare_looker
@@ -843,7 +583,7 @@
     fill_fields:
     - cloudflare_logs.edge_start_timestamp_hour
     filters:
-      cloudflare_logs.edge_start_timestamp_minute: 2 weeks
+      cloudflare_logs.edge_start_timestamp_hour: 2 weeks
     sorts:
     - cloudflare_logs.edge_start_timestamp_hour desc
     limit: 500
@@ -1023,7 +763,7 @@
     - cloudflare_logs.count
     - cloudflare_logs.bad_bot_count
     listen:
-      Date: cloudflare_logs.edge_start_timestamp_minute
+      Date: cloudflare_logs.edge_start_timestamp_hour
       Device Type: cloudflare_logs.client_device_type
       Country: countries.country_name
       Hostname: cloudflare_logs.client_request_host
@@ -1033,6 +773,273 @@
       Origin Response Code: cloudflare_logs.origin_response_status
       Request URI: cloudflare_logs.client_request_uri
     row: 4
+    col: 16
+    width: 7
+    height: 5
+  - title: Top Bad Bots IPs - AS Number - Country
+    name: Top Bad Bots IPs - AS Number - Country
+    model: cloudflare_looker
+    explore: cloudflare_logs
+    type: table
+    fields:
+    - cloudflare_logs.client_ip
+    - cloudflare_logs.client_asn
+    - countries.country_name
+    - cloudflare_logs.bad_bot_count
+    filters:
+      cloudflare_logs.bad_bot_count: not 0
+    sorts:
+    - cloudflare_logs.bad_bot_count desc
+    limit: 500
+    column_limit: 50
+    query_timezone: America/Los_Angeles
+    show_view_names: false
+    show_row_numbers: true
+    truncate_column_names: false
+    subtotals_at_bottom: false
+    hide_totals: false
+    hide_row_totals: false
+    series_labels: {}
+    table_theme: gray
+    limit_displayed_rows: false
+    enable_conditional_formatting: true
+    conditional_formatting:
+    - type: along a scale...
+      value:
+      background_color:
+      font_color:
+      color_application:
+        collection_id: legacy
+        custom:
+          id: 748995a5-96c2-bbb5-e5f1-1c0f40d1b267
+          label: Custom
+          type: continuous
+          stops:
+          - color: "#FFCCCC"
+            offset: 0
+          - color: "#FF6666"
+            offset: 100
+        options:
+          steps: 5
+          reverse: false
+      bold: false
+      italic: false
+      strikethrough: false
+      fields:
+    conditional_formatting_include_totals: false
+    conditional_formatting_include_nulls: false
+    series_types: {}
+    hidden_fields: []
+    y_axes: []
+    listen:
+      Date: cloudflare_logs.edge_start_timestamp_hour
+      Device Type: cloudflare_logs.client_device_type
+      Country: countries.country_name
+      Hostname: cloudflare_logs.client_request_host
+      IP address: cloudflare_logs.client_ip
+      User Agent: cloudflare_logs.client_request_user_agent
+      Edge Response Status: cloudflare_logs.edge_response_status
+      Origin Response Code: cloudflare_logs.origin_response_status
+      Request URI: cloudflare_logs.client_request_uri
+    row: 14
+    col: 16
+    width: 7
+    height: 4
+  - title: Top Bad Bots Requested URIs
+    name: Top Bad Bots Requested URIs
+    model: cloudflare_looker
+    explore: cloudflare_logs
+    type: table
+    fields:
+    - cloudflare_logs.client_request_uri_wrap
+    - cloudflare_logs.bad_bot_count
+    filters:
+      cloudflare_logs.bad_bot_count: not 0
+    sorts:
+    - cloudflare_logs.bad_bot_count desc
+    limit: 500
+    column_limit: 50
+    query_timezone: America/Los_Angeles
+    show_view_names: false
+    show_row_numbers: true
+    truncate_column_names: false
+    subtotals_at_bottom: false
+    hide_totals: false
+    hide_row_totals: false
+    series_labels: {}
+    table_theme: gray
+    limit_displayed_rows: false
+    enable_conditional_formatting: true
+    conditional_formatting:
+    - type: along a scale...
+      value:
+      background_color:
+      font_color:
+      color_application:
+        collection_id: legacy
+        custom:
+          id: 9667199d-55f8-afdf-820b-3283410cc52d
+          label: Custom
+          type: continuous
+          stops:
+          - color: "#FFCCCC"
+            offset: 0
+          - color: "#F36254"
+            offset: 100
+        options:
+          steps: 5
+      bold: false
+      italic: false
+      strikethrough: false
+      fields:
+    conditional_formatting_include_totals: false
+    conditional_formatting_include_nulls: false
+    series_types: {}
+    hidden_fields: []
+    y_axes: []
+    listen:
+      Date: cloudflare_logs.edge_start_timestamp_hour
+      Device Type: cloudflare_logs.client_device_type
+      Country: countries.country_name
+      Hostname: cloudflare_logs.client_request_host
+      IP address: cloudflare_logs.client_ip
+      User Agent: cloudflare_logs.client_request_user_agent
+      Edge Response Status: cloudflare_logs.edge_response_status
+      Origin Response Code: cloudflare_logs.origin_response_status
+      Request URI: cloudflare_logs.client_request_uri
+    row: 18
+    col: 16
+    width: 7
+    height: 4
+  - title: Top Bad Bots Requested User Agents
+    name: Top Bad Bots Requested User Agents
+    model: cloudflare_looker
+    explore: cloudflare_logs
+    type: table
+    fields:
+    - cloudflare_logs.client_request_user_agent_wrap
+    - cloudflare_logs.bad_bot_count
+    filters:
+      cloudflare_logs.bad_bot_count: not 0
+    sorts:
+    - cloudflare_logs.bad_bot_count desc
+    limit: 500
+    column_limit: 50
+    query_timezone: America/Los_Angeles
+    show_view_names: false
+    show_row_numbers: true
+    truncate_column_names: false
+    subtotals_at_bottom: false
+    hide_totals: false
+    hide_row_totals: false
+    series_labels: {}
+    table_theme: gray
+    limit_displayed_rows: false
+    enable_conditional_formatting: true
+    conditional_formatting:
+    - type: along a scale...
+      value:
+      background_color:
+      font_color:
+      color_application:
+        collection_id: legacy
+        custom:
+          id: ecefef80-4726-70e9-f9c6-b6a4e1c5a4be
+          label: Custom
+          type: continuous
+          stops:
+          - color: "#FFCCCC"
+            offset: 0
+          - color: "#F36254"
+            offset: 100
+        options:
+          steps: 5
+      bold: false
+      italic: false
+      strikethrough: false
+      fields:
+    conditional_formatting_include_totals: false
+    conditional_formatting_include_nulls: false
+    series_types: {}
+    hidden_fields: []
+    y_axes: []
+    listen:
+      Date: cloudflare_logs.edge_start_timestamp_hour
+      Device Type: cloudflare_logs.client_device_type
+      Country: countries.country_name
+      Hostname: cloudflare_logs.client_request_host
+      IP address: cloudflare_logs.client_ip
+      User Agent: cloudflare_logs.client_request_user_agent
+      Edge Response Status: cloudflare_logs.edge_response_status
+      Origin Response Code: cloudflare_logs.origin_response_status
+      Request URI: cloudflare_logs.client_request_uri
+    row: 22
+    col: 16
+    width: 7
+    height: 4
+  - title: Top Bad Bots Referer
+    name: Top Bad Bots Referer
+    model: cloudflare_looker
+    explore: cloudflare_logs
+    type: table
+    fields:
+    - cloudflare_logs.bad_bot_count
+    - cloudflare_logs.client_request_referer_wrap
+    filters:
+      cloudflare_logs.bad_bot_count: not 0
+    sorts:
+    - cloudflare_logs.bad_bot_count desc
+    limit: 500
+    column_limit: 50
+    query_timezone: America/Los_Angeles
+    show_view_names: false
+    show_row_numbers: true
+    truncate_column_names: false
+    subtotals_at_bottom: false
+    hide_totals: false
+    hide_row_totals: false
+    series_labels: {}
+    table_theme: gray
+    limit_displayed_rows: false
+    enable_conditional_formatting: true
+    conditional_formatting:
+    - type: along a scale...
+      value:
+      background_color:
+      font_color:
+      color_application:
+        collection_id: legacy
+        custom:
+          id: ecefef80-4726-70e9-f9c6-b6a4e1c5a4be
+          label: Custom
+          type: continuous
+          stops:
+          - color: "#FFCCCC"
+            offset: 0
+          - color: "#F36254"
+            offset: 100
+        options:
+          steps: 5
+      bold: false
+      italic: false
+      strikethrough: false
+      fields:
+    conditional_formatting_include_totals: false
+    conditional_formatting_include_nulls: false
+    series_types: {}
+    hidden_fields: []
+    y_axes: []
+    listen:
+      Date: cloudflare_logs.edge_start_timestamp_hour
+      Device Type: cloudflare_logs.client_device_type
+      Country: countries.country_name
+      Hostname: cloudflare_logs.client_request_host
+      IP address: cloudflare_logs.client_ip
+      User Agent: cloudflare_logs.client_request_user_agent
+      Edge Response Status: cloudflare_logs.edge_response_status
+      Origin Response Code: cloudflare_logs.origin_response_status
+      Request URI: cloudflare_logs.client_request_uri
+    row: 26
     col: 16
     width: 7
     height: 5
@@ -1046,7 +1053,7 @@
     model: cloudflare_looker
     explore: cloudflare_logs
     listens_to_filters: []
-    field: cloudflare_logs.edge_start_timestamp_minute
+    field: cloudflare_logs.edge_start_timestamp_hour
   - name: Device Type
     title: Device Type
     type: field_filter

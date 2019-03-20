@@ -45,12 +45,12 @@ view: cloudflare_logs {
 
   dimension: is_cache_status_hit_r {
     type: yesno
-    sql: ${cache_cache_status} IN ("hit", "stale", "updating") ;;
+    sql: ${cache_cache_status} IN ("hit", "stale", "updating", "ignored") ;;
   }
 
   dimension: is_cache_status_hit_b {
     type: yesno
-    sql: ${cache_cache_status} IN ("hit", "stale", "updating", "revalidated") ;;
+    sql: ${cache_cache_status} IN ("hit", "stale", "updating",  "ignored", "revalidated") ;;
   }
 
   dimension: is_cache_status_not_in_bypass_unknown {
