@@ -256,7 +256,7 @@
     width: 7
     height: 2
   - title: False Detected Bots
-    name: False Detected Bots Text
+    name: False Detected Bots Name
     model: cloudflare_looker
     explore: cloudflare_logs
     type: single_value

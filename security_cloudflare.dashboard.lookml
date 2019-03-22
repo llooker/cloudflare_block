@@ -631,11 +631,9 @@
     col: 7
     width: 7
     height: 5
-  - name: '<img style="display: block;" class="top-nav__logo top-nav__logo--dark top-nav__logo--transparent"
-      src="https://www.cloudflare.com/img/logo-cloudflare-dark.svg">'
+  - name: "Cloudflare Logo"
     type: text
-    title_text: '<img style="display: block;" class="top-nav__logo top-nav__logo--dark
-      top-nav__logo--transparent" src="https://www.cloudflare.com/img/logo-cloudflare-dark.svg">'
+    title_text: '<img src="https://www.cloudflare.com/img/logo-cloudflare-dark.svg">'
     row: 0
     col: 1
     width: 4
