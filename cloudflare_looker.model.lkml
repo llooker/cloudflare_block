@@ -4,7 +4,7 @@ connection: "bigquery_camiliame"
 include: "*.view"
 
 # include all the dashboards
-#include: "*.dashboard.lookml"
+# include: "*.dashboard.lookml"
 
 datagroup: camilia_looker_default_datagroup {
 #   sql_trigger: SELECT MAX(id) FROM etl_log;;
