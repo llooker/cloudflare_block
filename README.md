@@ -11,7 +11,7 @@ You should replace the connection name in the model file with yours. All the tab
 ###### LookML model:
 * cloudflare_looker
 
-###### Dashboards:
+###### Dashboards*:
 * performanc_cloudflare
 * reliability_cloudflare
 * security_cloudflare
@@ -24,6 +24,14 @@ You should replace the connection name in the model file with yours. All the tab
 * current_second_stats
 * events_per_second
 
+
+
+
+<br>
+<u>Dashboards*</u>
+In order to avoid errors in dashboards LookML files please make sure the following rows are commented in model file "cloudflare_looker":
+# include all the dashboards
+# include: "*.dashboard.lookml"
 
 
 ## Learn more
