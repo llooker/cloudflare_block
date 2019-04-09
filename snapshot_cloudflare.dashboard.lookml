@@ -19,9 +19,11 @@
     col: 1
     width: 22
     height: 2
-  - name: "Cloudflare Logo"
+  - name: '<img style="display: block;" class="top-nav__logo top-nav__logo--dark top-nav__logo--transparent"
+      src="https://www.cloudflare.com/img/logo-cloudflare-dark.svg">'
     type: text
-    title_text: '<img src="https://www.cloudflare.com/img/logo-cloudflare-dark.svg">'
+    title_text: '<img style="display: block;" class="top-nav__logo top-nav__logo--dark
+      top-nav__logo--transparent" src="https://www.cloudflare.com/img/logo-cloudflare-dark.svg">'
     row: 0
     col: 1
     width: 4
@@ -38,11 +40,9 @@
     model: cloudflare_looker
     explore: cloudflare_logs
     type: single_value
-    fields:
-    - cloudflare_logs.count
+    fields: [cloudflare_logs.count]
     filters: {}
-    sorts:
-    - cloudflare_logs.count desc
+    sorts: [cloudflare_logs.count desc]
     limit: 500
     query_timezone: America/Los_Angeles
     custom_color_enabled: false
@@ -65,20 +65,59 @@
       Edge Response Status: cloudflare_logs.edge_response_status
       Origin Response Code: cloudflare_logs.origin_response_status
       Request URI: cloudflare_logs.client_request_uri
+      RayID: cloudflare_logs.ray_id
+      Worker Subrequest: cloudflare_logs.worker_subrequest
+      Client Request Method: cloudflare_logs.client_request_method
     row: 2
     col: 1
     width: 5
     height: 2
-  - title: Saved Bandwidth
-    name: Saved Bandwidth
+  - title: Total Bandwidth
+    name: Total Bandwidth
     model: cloudflare_looker
     explore: cloudflare_logs
     type: single_value
-    fields:
-    - cloudflare_logs.saved_bandwidth_percentage
+    fields: [cloudflare_logs.total_bandwidth]
     filters: {}
     limit: 500
     query_timezone: America/Los_Angeles
+    stacking: ''
+    colors: ["#265780", "#D98541", "#C53DCC", "#33992E", "#36B38D", "#A2BF39", "#5A3DCC",
+      "#8a0f3d", "#ff7aa3", "#2d89bd", "#8f09b0", "#d94141"]
+    show_value_labels: true
+    label_density: 25
+    legend_position: right
+    hide_legend: false
+    x_axis_gridlines: false
+    y_axis_gridlines: true
+    show_view_names: false
+    point_style: none
+    series_colors:
+      200 - camiliame_logs.count: "#26802a"
+      403 - camiliame_logs.count: "#992e68"
+      404 - camiliame_logs.count: "#a936b3"
+    series_types: {}
+    limit_displayed_rows: false
+    hidden_series: []
+    y_axis_combined: true
+    show_y_axis_labels: true
+    show_y_axis_ticks: true
+    y_axis_tick_density: default
+    y_axis_tick_density_custom: 5
+    show_x_axis_label: true
+    show_x_axis_ticks: true
+    x_axis_scale: auto
+    y_axis_scale_mode: linear
+    x_axis_reversed: false
+    y_axis_reversed: false
+    plot_size_by_field: false
+    show_null_points: true
+    interpolation: linear
+    show_totals_labels: false
+    show_silhouette: false
+    totals_color: "#808080"
+    ordering: none
+    show_null_labels: false
     hidden_fields: []
     y_axes: []
     listen:
@@ -91,8 +130,11 @@
       Edge Response Status: cloudflare_logs.edge_response_status
       Origin Response Code: cloudflare_logs.origin_response_status
       Request URI: cloudflare_logs.client_request_uri
+      RayID: cloudflare_logs.ray_id
+      Worker Subrequest: cloudflare_logs.worker_subrequest
+      Client Request Method: cloudflare_logs.client_request_method
     row: 2
-    col: 15
+    col: 6
     width: 4
     height: 2
   - title: Cached Bandwidth
@@ -100,26 +142,14 @@
     model: cloudflare_looker
     explore: cloudflare_logs
     type: single_value
-    fields:
-    - cloudflare_logs.saved_bandwidth
+    fields: [cloudflare_logs.saved_bandwidth]
     filters:
       cloudflare_logs.edge_start_timestamp_hour: 7 days
     limit: 500
     query_timezone: America/Los_Angeles
     stacking: ''
-    colors:
-    - "#265780"
-    - "#D98541"
-    - "#C53DCC"
-    - "#33992E"
-    - "#36B38D"
-    - "#A2BF39"
-    - "#5A3DCC"
-    - "#8a0f3d"
-    - "#ff7aa3"
-    - "#2d89bd"
-    - "#8f09b0"
-    - "#d94141"
+    colors: ["#265780", "#D98541", "#C53DCC", "#33992E", "#36B38D", "#A2BF39", "#5A3DCC",
+      "#8a0f3d", "#ff7aa3", "#2d89bd", "#8f09b0", "#d94141"]
     show_value_labels: true
     label_density: 25
     legend_position: right
@@ -166,68 +196,104 @@
       Edge Response Status: cloudflare_logs.edge_response_status
       Origin Response Code: cloudflare_logs.origin_response_status
       Request URI: cloudflare_logs.client_request_uri
+      RayID: cloudflare_logs.ray_id
+      Worker Subrequest: cloudflare_logs.worker_subrequest
+      Client Request Method: cloudflare_logs.client_request_method
     row: 2
-    col: 11
+    col: 10
     width: 4
     height: 2
-  - title: Total Bandwidth
-    name: Total Bandwidth
+  - title: Threats Stopped
+    name: Threats Stopped
     model: cloudflare_looker
     explore: cloudflare_logs
     type: single_value
-    fields:
-    - cloudflare_logs.total_bandwidth
+    fields: [cloudflare_logs.count]
+    filters:
+      cloudflare_logs.is_threat: 'Yes'
+    limit: 500
+    query_timezone: America/Los_Angeles
+    custom_color_enabled: true
+    custom_color: "#ff3c39"
+    show_single_value_title: true
+    show_comparison: false
+    comparison_type: value
+    comparison_reverse_colors: false
+    show_comparison_label: true
+    listen:
+      Date: cloudflare_logs.edge_start_timestamp_hour
+      Device Type: cloudflare_logs.client_device_type
+      Country: countries.country_name
+      Hostname: cloudflare_logs.client_request_host
+      IP address: cloudflare_logs.client_ip
+      User Agent: cloudflare_logs.client_request_user_agent
+      Edge Response Status: cloudflare_logs.edge_response_status
+      Origin Response Code: cloudflare_logs.origin_response_status
+      Request URI: cloudflare_logs.client_request_uri
+      RayID: cloudflare_logs.ray_id
+      Worker Subrequest: cloudflare_logs.worker_subrequest
+      Client Request Method: cloudflare_logs.client_request_method
+    row: 2
+    col: 17
+    width: 3
+    height: 2
+  - title: Bad Bots
+    name: Bad Bots
+    model: cloudflare_looker
+    explore: cloudflare_logs
+    type: single_value
+    fields: [cloudflare_logs.bad_bot_count]
+    filters: {}
+    limit: 500
+    column_limit: 50
+    query_timezone: America/Los_Angeles
+    custom_color_enabled: true
+    custom_color: "#ff6666"
+    show_single_value_title: true
+    show_comparison: false
+    comparison_type: value
+    comparison_reverse_colors: false
+    show_comparison_label: true
+    show_view_names: false
+    show_row_numbers: true
+    truncate_column_names: false
+    hide_totals: false
+    hide_row_totals: false
+    series_labels: {}
+    table_theme: gray
+    limit_displayed_rows: false
+    enable_conditional_formatting: false
+    conditional_formatting_include_totals: false
+    conditional_formatting_include_nulls: false
+    series_types: {}
+    hidden_fields: []
+    y_axes: []
+    listen:
+      Date: cloudflare_logs.edge_start_timestamp_date
+      Device Type: cloudflare_logs.client_device_type
+      Country: countries.country_name
+      Hostname: cloudflare_logs.client_request_host
+      IP address: cloudflare_logs.client_ip
+      User Agent: cloudflare_logs.client_request_user_agent
+      Edge Response Status: cloudflare_logs.edge_response_status
+      Origin Response Code: cloudflare_logs.origin_response_status
+      Request URI: cloudflare_logs.client_request_uri
+      RayID: cloudflare_logs.ray_id
+      Worker Subrequest: cloudflare_logs.worker_subrequest
+      Client Request Method: cloudflare_logs.client_request_method
+    row: 2
+    col: 20
+    width: 3
+    height: 2
+  - title: Saved Bandwidth
+    name: Saved Bandwidth
+    model: cloudflare_looker
+    explore: cloudflare_logs
+    type: single_value
+    fields: [cloudflare_logs.saved_bandwidth_percentage]
     filters: {}
     limit: 500
     query_timezone: America/Los_Angeles
-    stacking: ''
-    colors:
-    - "#265780"
-    - "#D98541"
-    - "#C53DCC"
-    - "#33992E"
-    - "#36B38D"
-    - "#A2BF39"
-    - "#5A3DCC"
-    - "#8a0f3d"
-    - "#ff7aa3"
-    - "#2d89bd"
-    - "#8f09b0"
-    - "#d94141"
-    show_value_labels: true
-    label_density: 25
-    legend_position: right
-    hide_legend: false
-    x_axis_gridlines: false
-    y_axis_gridlines: true
-    show_view_names: false
-    point_style: none
-    series_colors:
-      200 - camiliame_logs.count: "#26802a"
-      403 - camiliame_logs.count: "#992e68"
-      404 - camiliame_logs.count: "#a936b3"
-    series_types: {}
-    limit_displayed_rows: false
-    hidden_series: []
-    y_axis_combined: true
-    show_y_axis_labels: true
-    show_y_axis_ticks: true
-    y_axis_tick_density: default
-    y_axis_tick_density_custom: 5
-    show_x_axis_label: true
-    show_x_axis_ticks: true
-    x_axis_scale: auto
-    y_axis_scale_mode: linear
-    x_axis_reversed: false
-    y_axis_reversed: false
-    plot_size_by_field: false
-    show_null_points: true
-    interpolation: linear
-    show_totals_labels: false
-    show_silhouette: false
-    totals_color: "#808080"
-    ordering: none
-    show_null_labels: false
     hidden_fields: []
     y_axes: []
     listen:
@@ -240,46 +306,21 @@
       Edge Response Status: cloudflare_logs.edge_response_status
       Origin Response Code: cloudflare_logs.origin_response_status
       Request URI: cloudflare_logs.client_request_uri
+      RayID: cloudflare_logs.ray_id
+      Worker Subrequest: cloudflare_logs.worker_subrequest
+      Client Request Method: cloudflare_logs.client_request_method
     row: 2
-    col: 6
-    width: 5
-    height: 2
-  - title: Threats Stopped
-    name: Threats Stopped
-    model: cloudflare_looker
-    explore: cloudflare_logs
-    type: single_value
-    fields:
-    - cloudflare_logs.count
-    filters:
-      cloudflare_logs.is_threat: 'Yes'
-    limit: 500
-    query_timezone: America/Los_Angeles
-    listen:
-      Date: cloudflare_logs.edge_start_timestamp_hour
-      Device Type: cloudflare_logs.client_device_type
-      Country: countries.country_name
-      Hostname: cloudflare_logs.client_request_host
-      IP address: cloudflare_logs.client_ip
-      User Agent: cloudflare_logs.client_request_user_agent
-      Edge Response Status: cloudflare_logs.edge_response_status
-      Origin Response Code: cloudflare_logs.origin_response_status
-      Request URI: cloudflare_logs.client_request_uri
-    row: 2
-    col: 19
-    width: 4
+    col: 14
+    width: 3
     height: 2
   - title: Top Traffic Countries Map
     name: Top Traffic Countries Map
     model: cloudflare_looker
     explore: cloudflare_logs
     type: looker_map
-    fields:
-    - cloudflare_logs.client_country_code
-    - cloudflare_logs.count
+    fields: [cloudflare_logs.client_country_code, cloudflare_logs.count]
     filters: {}
-    sorts:
-    - cloudflare_logs.count desc
+    sorts: [cloudflare_logs.count desc]
     limit: 500
     query_timezone: America/Los_Angeles
     map_plot_mode: points
@@ -316,6 +357,9 @@
       Edge Response Status: cloudflare_logs.edge_response_status
       Origin Response Code: cloudflare_logs.origin_response_status
       Request URI: cloudflare_logs.client_request_uri
+      RayID: cloudflare_logs.ray_id
+      Worker Subrequest: cloudflare_logs.worker_subrequest
+      Client Request Method: cloudflare_logs.client_request_method
     row: 4
     col: 1
     width: 8
@@ -325,12 +369,9 @@
     model: cloudflare_looker
     explore: cloudflare_logs
     type: table
-    fields:
-    - cloudflare_logs.count
-    - countries.country_name
+    fields: [cloudflare_logs.count, countries.country_name]
     filters: {}
-    sorts:
-    - cloudflare_logs.count desc
+    sorts: [cloudflare_logs.count desc]
     limit: 500
     query_timezone: America/Los_Angeles
     show_view_names: false
@@ -357,6 +398,9 @@
       Edge Response Status: cloudflare_logs.edge_response_status
       Origin Response Code: cloudflare_logs.origin_response_status
       Request URI: cloudflare_logs.client_request_uri
+      RayID: cloudflare_logs.ray_id
+      Worker Subrequest: cloudflare_logs.worker_subrequest
+      Client Request Method: cloudflare_logs.client_request_method
     row: 4
     col: 9
     width: 7
@@ -366,13 +410,10 @@
     model: cloudflare_looker
     explore: cloudflare_logs
     type: table
-    fields:
-    - cloudflare_logs.count
-    - countries.country_name
+    fields: [cloudflare_logs.count, countries.country_name]
     filters:
       cloudflare_logs.is_threat: 'Yes'
-    sorts:
-    - cloudflare_logs.count desc
+    sorts: [cloudflare_logs.count desc]
     limit: 500
     query_timezone: America/Los_Angeles
     show_view_names: false
@@ -399,6 +440,9 @@
       Edge Response Status: cloudflare_logs.edge_response_status
       Origin Response Code: cloudflare_logs.origin_response_status
       Request URI: cloudflare_logs.client_request_uri
+      RayID: cloudflare_logs.ray_id
+      Worker Subrequest: cloudflare_logs.worker_subrequest
+      Client Request Method: cloudflare_logs.client_request_method
     row: 4
     col: 16
     width: 7
@@ -408,14 +452,10 @@
     model: cloudflare_looker
     explore: cloudflare_logs
     type: looker_pie
-    fields:
-    - cloudflare_logs.client_device_type
-    - cloudflare_logs.count
+    fields: [cloudflare_logs.client_device_type, cloudflare_logs.count]
     filters:
       cloudflare_logs.edge_start_timestamp_date: 24 hours
-    sorts:
-    - cloudflare_logs.count desc
-    - cloudflare_logs.client_device_type
+    sorts: [cloudflare_logs.count desc, cloudflare_logs.client_device_type]
     limit: 10
     query_timezone: America/Los_Angeles
     stacking: normal
@@ -429,22 +469,10 @@
     point_style: none
     series_types: {}
     limit_displayed_rows: false
-    y_axes:
-    - label: ''
-      orientation: left
-      series:
-      - id: desktop - camiliame_logs.count
-        name: desktop
-        axisId: cloudflare_logs.count
-      - id: mobile - camiliame_logs.count
-        name: mobile
-        axisId: cloudflare_logs.count
-      showLabels: false
-      showValues: true
-      unpinAxis: false
-      tickDensity: default
-      tickDensityCustom: 5
-      type: linear
+    y_axes: [{label: '', orientation: left, series: [{id: desktop - camiliame_logs.count,
+            name: desktop, axisId: cloudflare_logs.count}, {id: mobile - camiliame_logs.count,
+            name: mobile, axisId: cloudflare_logs.count}], showLabels: false, showValues: true,
+        unpinAxis: false, tickDensity: default, tickDensityCustom: 5, type: linear}]
     y_axis_combined: true
     show_y_axis_labels: true
     show_y_axis_ticks: true
@@ -473,6 +501,9 @@
       Edge Response Status: cloudflare_logs.edge_response_status
       Origin Response Code: cloudflare_logs.origin_response_status
       Request URI: cloudflare_logs.client_request_uri
+      RayID: cloudflare_logs.ray_id
+      Worker Subrequest: cloudflare_logs.worker_subrequest
+      Client Request Method: cloudflare_logs.client_request_method
     row: 12
     col: 1
     width: 6
@@ -482,13 +513,10 @@
     model: cloudflare_looker
     explore: cloudflare_logs
     type: looker_pie
-    fields:
-    - cloudflare_logs.count
-    - cloudflare_logs.client_request_protocol
+    fields: [cloudflare_logs.count, cloudflare_logs.client_request_protocol]
     filters:
       cloudflare_logs.edge_start_timestamp_date: 24 hours
-    sorts:
-    - cloudflare_logs.count desc
+    sorts: [cloudflare_logs.count desc]
     limit: 10
     query_timezone: America/Los_Angeles
     stacking: normal
@@ -502,22 +530,10 @@
     point_style: none
     series_types: {}
     limit_displayed_rows: false
-    y_axes:
-    - label: ''
-      orientation: left
-      series:
-      - id: desktop - camiliame_logs.count
-        name: desktop
-        axisId: cloudflare_logs.count
-      - id: mobile - camiliame_logs.count
-        name: mobile
-        axisId: cloudflare_logs.count
-      showLabels: false
-      showValues: true
-      unpinAxis: false
-      tickDensity: default
-      tickDensityCustom: 5
-      type: linear
+    y_axes: [{label: '', orientation: left, series: [{id: desktop - camiliame_logs.count,
+            name: desktop, axisId: cloudflare_logs.count}, {id: mobile - camiliame_logs.count,
+            name: mobile, axisId: cloudflare_logs.count}], showLabels: false, showValues: true,
+        unpinAxis: false, tickDensity: default, tickDensityCustom: 5, type: linear}]
     y_axis_combined: true
     show_y_axis_labels: true
     show_y_axis_ticks: true
@@ -546,6 +562,9 @@
       Edge Response Status: cloudflare_logs.edge_response_status
       Origin Response Code: cloudflare_logs.origin_response_status
       Request URI: cloudflare_logs.client_request_uri
+      RayID: cloudflare_logs.ray_id
+      Worker Subrequest: cloudflare_logs.worker_subrequest
+      Client Request Method: cloudflare_logs.client_request_method
     row: 12
     col: 7
     width: 5
@@ -555,12 +574,9 @@
     model: cloudflare_looker
     explore: cloudflare_logs
     type: looker_pie
-    fields:
-    - cloudflare_logs.count
-    - cloudflare_logs.edge_response_content_type_group
+    fields: [cloudflare_logs.count, cloudflare_logs.edge_response_content_type_group]
     filters: {}
-    sorts:
-    - cloudflare_logs.count desc
+    sorts: [cloudflare_logs.count desc]
     limit: 500
     query_timezone: America/Los_Angeles
     series_types: {}
@@ -576,22 +592,63 @@
       Edge Response Status: cloudflare_logs.edge_response_status
       Origin Response Code: cloudflare_logs.origin_response_status
       Request URI: cloudflare_logs.client_request_uri
+      RayID: cloudflare_logs.ray_id
+      Worker Subrequest: cloudflare_logs.worker_subrequest
+      Client Request Method: cloudflare_logs.client_request_method
     row: 12
     col: 17
     width: 6
     height: 4
+  - title: Top Requested URI
+    name: Top Requested URI
+    model: cloudflare_looker
+    explore: cloudflare_logs
+    type: table
+    fields: [cloudflare_logs.count, cloudflare_logs.client_request_uri_wrap]
+    filters: {}
+    sorts: [cloudflare_logs.count desc]
+    limit: 500
+    query_timezone: America/Los_Angeles
+    show_view_names: false
+    show_row_numbers: true
+    truncate_column_names: false
+    hide_totals: false
+    hide_row_totals: false
+    series_labels: {}
+    table_theme: gray
+    limit_displayed_rows: false
+    enable_conditional_formatting: false
+    conditional_formatting_include_totals: false
+    conditional_formatting_include_nulls: false
+    series_types: {}
+    hidden_fields: []
+    y_axes: []
+    listen:
+      Date: cloudflare_logs.edge_start_timestamp_hour
+      Device Type: cloudflare_logs.client_device_type
+      Country: countries.country_name
+      Hostname: cloudflare_logs.client_request_host
+      IP address: cloudflare_logs.client_ip
+      User Agent: cloudflare_logs.client_request_user_agent
+      Edge Response Status: cloudflare_logs.edge_response_status
+      Origin Response Code: cloudflare_logs.origin_response_status
+      Request URI: cloudflare_logs.client_request_uri
+      RayID: cloudflare_logs.ray_id
+      Worker Subrequest: cloudflare_logs.worker_subrequest
+      Client Request Method: cloudflare_logs.client_request_method
+    row: 16
+    col: 1
+    width: 11
+    height: 6
   - title: Request Methods
     name: Request Methods
     model: cloudflare_looker
     explore: cloudflare_logs
     type: looker_pie
-    fields:
-    - cloudflare_logs.count
-    - cloudflare_logs.client_request_method
+    fields: [cloudflare_logs.count, cloudflare_logs.client_request_method]
     filters:
       cloudflare_logs.edge_start_timestamp_date: 24 hours
-    sorts:
-    - cloudflare_logs.count desc
+    sorts: [cloudflare_logs.count desc]
     limit: 10
     query_timezone: America/Los_Angeles
     stacking: normal
@@ -605,22 +662,10 @@
     point_style: none
     series_types: {}
     limit_displayed_rows: false
-    y_axes:
-    - label: ''
-      orientation: left
-      series:
-      - id: desktop - camiliame_logs.count
-        name: desktop
-        axisId: cloudflare_logs.count
-      - id: mobile - camiliame_logs.count
-        name: mobile
-        axisId: cloudflare_logs.count
-      showLabels: false
-      showValues: true
-      unpinAxis: false
-      tickDensity: default
-      tickDensityCustom: 5
-      type: linear
+    y_axes: [{label: '', orientation: left, series: [{id: desktop - camiliame_logs.count,
+            name: desktop, axisId: cloudflare_logs.count}, {id: mobile - camiliame_logs.count,
+            name: mobile, axisId: cloudflare_logs.count}], showLabels: false, showValues: true,
+        unpinAxis: false, tickDensity: default, tickDensityCustom: 5, type: linear}]
     y_axis_combined: true
     show_y_axis_labels: true
     show_y_axis_ticks: true
@@ -649,62 +694,21 @@
       Edge Response Status: cloudflare_logs.edge_response_status
       Origin Response Code: cloudflare_logs.origin_response_status
       Request URI: cloudflare_logs.client_request_uri
+      RayID: cloudflare_logs.ray_id
+      Worker Subrequest: cloudflare_logs.worker_subrequest
+      Client Request Method: cloudflare_logs.client_request_method
     row: 12
     col: 12
     width: 5
     height: 4
-  - title: Top Requested URI
-    name: Top Requested URI
-    model: cloudflare_looker
-    explore: cloudflare_logs
-    type: table
-    fields:
-    - cloudflare_logs.count
-    - cloudflare_logs.client_request_uri_wrap
-    filters: {}
-    sorts:
-    - cloudflare_logs.count desc
-    limit: 500
-    query_timezone: America/Los_Angeles
-    show_view_names: false
-    show_row_numbers: true
-    truncate_column_names: false
-    hide_totals: false
-    hide_row_totals: false
-    series_labels: {}
-    table_theme: gray
-    limit_displayed_rows: false
-    enable_conditional_formatting: false
-    conditional_formatting_include_totals: false
-    conditional_formatting_include_nulls: false
-    series_types: {}
-    hidden_fields: []
-    y_axes: []
-    listen:
-      Date: cloudflare_logs.edge_start_timestamp_hour
-      Device Type: cloudflare_logs.client_device_type
-      Country: countries.country_name
-      Hostname: cloudflare_logs.client_request_host
-      IP address: cloudflare_logs.client_ip
-      User Agent: cloudflare_logs.client_request_user_agent
-      Edge Response Status: cloudflare_logs.edge_response_status
-      Origin Response Code: cloudflare_logs.origin_response_status
-      Request URI: cloudflare_logs.client_request_uri
-    row: 16
-    col: 1
-    width: 11
-    height: 6
   - title: Top Referer
     name: Top Referer
     model: cloudflare_looker
     explore: cloudflare_logs
     type: table
-    fields:
-    - cloudflare_logs.count
-    - cloudflare_logs.client_request_referer_wrap
+    fields: [cloudflare_logs.count, cloudflare_logs.client_request_referer_wrap]
     filters: {}
-    sorts:
-    - cloudflare_logs.count desc
+    sorts: [cloudflare_logs.count desc]
     limit: 500
     query_timezone: America/Los_Angeles
     show_view_names: false
@@ -731,6 +735,9 @@
       Edge Response Status: cloudflare_logs.edge_response_status
       Origin Response Code: cloudflare_logs.origin_response_status
       Request URI: cloudflare_logs.client_request_uri
+      RayID: cloudflare_logs.ray_id
+      Worker Subrequest: cloudflare_logs.worker_subrequest
+      Client Request Method: cloudflare_logs.client_request_method
     row: 16
     col: 12
     width: 11
@@ -740,12 +747,9 @@
     model: cloudflare_looker
     explore: cloudflare_logs
     type: table
-    fields:
-    - cloudflare_logs.count
-    - cloudflare_logs.client_ipclass
+    fields: [cloudflare_logs.count, cloudflare_logs.client_ipclass]
     filters: {}
-    sorts:
-    - cloudflare_logs.count desc
+    sorts: [cloudflare_logs.count desc]
     limit: 500
     query_timezone: America/Los_Angeles
     show_view_names: false
@@ -772,6 +776,9 @@
       Edge Response Status: cloudflare_logs.edge_response_status
       Origin Response Code: cloudflare_logs.origin_response_status
       Request URI: cloudflare_logs.client_request_uri
+      RayID: cloudflare_logs.ray_id
+      Worker Subrequest: cloudflare_logs.worker_subrequest
+      Client Request Method: cloudflare_logs.client_request_method
     row: 24
     col: 1
     width: 6
@@ -781,13 +788,9 @@
     model: cloudflare_looker
     explore: cloudflare_logs
     type: table
-    fields:
-    - cloudflare_logs.client_ip
-    - cloudflare_logs.count
-    - countries.country_name
+    fields: [cloudflare_logs.client_ip, cloudflare_logs.count, countries.country_name]
     filters: {}
-    sorts:
-    - cloudflare_logs.count desc
+    sorts: [cloudflare_logs.count desc]
     limit: 500
     query_timezone: America/Los_Angeles
     show_view_names: false
@@ -814,6 +817,9 @@
       Edge Response Status: cloudflare_logs.edge_response_status
       Origin Response Code: cloudflare_logs.origin_response_status
       Request URI: cloudflare_logs.client_request_uri
+      RayID: cloudflare_logs.ray_id
+      Worker Subrequest: cloudflare_logs.worker_subrequest
+      Client Request Method: cloudflare_logs.client_request_method
     row: 24
     col: 7
     width: 7
@@ -823,12 +829,9 @@
     model: cloudflare_looker
     explore: cloudflare_logs
     type: table
-    fields:
-    - cloudflare_logs.count
-    - cloudflare_logs.client_request_user_agent_wrap
+    fields: [cloudflare_logs.count, cloudflare_logs.client_request_user_agent_wrap]
     filters: {}
-    sorts:
-    - cloudflare_logs.count desc
+    sorts: [cloudflare_logs.count desc]
     limit: 500
     query_timezone: America/Los_Angeles
     show_view_names: false
@@ -855,6 +858,9 @@
       Edge Response Status: cloudflare_logs.edge_response_status
       Origin Response Code: cloudflare_logs.origin_response_status
       Request URI: cloudflare_logs.client_request_uri
+      RayID: cloudflare_logs.ray_id
+      Worker Subrequest: cloudflare_logs.worker_subrequest
+      Client Request Method: cloudflare_logs.client_request_method
     row: 24
     col: 14
     width: 9
@@ -950,3 +956,33 @@
     explore: cloudflare_logs
     listens_to_filters: []
     field: cloudflare_logs.client_request_uri
+  - name: RayID
+    title: RayID
+    type: field_filter
+    default_value: ''
+    allow_multiple_values: true
+    required: false
+    model: cloudflare_looker
+    explore: cloudflare_logs
+    listens_to_filters: []
+    field: cloudflare_logs.ray_id
+  - name: Worker Subrequest
+    title: Worker Subrequest
+    type: field_filter
+    default_value: 'No'
+    allow_multiple_values: true
+    required: false
+    model: cloudflare_looker
+    explore: cloudflare_logs
+    listens_to_filters: []
+    field: cloudflare_logs.worker_subrequest
+  - name: Client Request Method
+    title: Client Request Method
+    type: field_filter
+    default_value: "-PURGE"
+    allow_multiple_values: true
+    required: false
+    model: cloudflare_looker
+    explore: cloudflare_logs
+    listens_to_filters: []
+    field: cloudflare_logs.client_request_method
