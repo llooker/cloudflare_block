@@ -27,7 +27,7 @@ view: cloudflare_logs {
     group_label: "Bot"
   }
 
-    dimension: is_false_detected_bot {
+    dimension: is_captcha_solved {
     type: yesno
     sql: (edgePathingSrc = 'filterBasedFirewall' AND edgePathingStatus = 'captchaSucc');;
     group_label: "Bot"
@@ -631,19 +631,19 @@ view: cloudflare_logs {
   }
 
 
-  measure: false_bot_count {
+  measure: captha_solved_count {
     type: count
     filters: {
-      field: is_false_detected_bot
+      field: is_captcha_solved
       value: "yes"
     }
     drill_fields: [default*]
-    label: "false bot count"
+    label: "captcha solved count"
   }
 
   measure: bad_bot_count {
     type: number
-    sql: ${bot_count} - ${false_bot_count} ;;
+    sql: ${bot_count} - ${captha_solved_count} ;;
     value_format_name: decimal_0
     drill_fields: [default*]
     label: "bad bot count"
