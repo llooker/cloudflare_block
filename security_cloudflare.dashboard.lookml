@@ -408,12 +408,12 @@
     point_style: none
     series_types: {}
     limit_displayed_rows: false
-    y_axes: [{label: '', orientation: left, series: [{id: ctry - camiliame_logs.count,
-            name: ctry, axisId: cloudflare_logs.count}, {id: ip - camiliame_logs.count,
-            name: ip, axisId: cloudflare_logs.count}, {id: rateLimit - camiliame_logs.count,
-            name: rateLimit, axisId: cloudflare_logs.count}, {id: ua - camiliame_logs.count,
-            name: ua, axisId: cloudflare_logs.count}, {id: unknown - camiliame_logs.count,
-            name: unknown, axisId: cloudflare_logs.count}, {id: zl - camiliame_logs.count,
+    y_axes: [{label: '', orientation: left, series: [{id: ctry - cf_analytics_logs.count,
+            name: ctry, axisId: cloudflare_logs.count}, {id: ip - cf_analytics_logs.count,
+            name: ip, axisId: cloudflare_logs.count}, {id: rateLimit - cf_analytics_logs.count,
+            name: rateLimit, axisId: cloudflare_logs.count}, {id: ua - cf_analytics_logs.count,
+            name: ua, axisId: cloudflare_logs.count}, {id: unknown - cf_analytics_logs.count,
+            name: unknown, axisId: cloudflare_logs.count}, {id: zl - cf_analytics_logs.count,
             name: zl, axisId: cloudflare_logs.count}], showLabels: true, showValues: true,
         unpinAxis: false, tickDensity: default, tickDensityCustom: 5, type: linear}]
     y_axis_combined: true
@@ -823,8 +823,8 @@
     y_axis_gridlines: true
     point_style: none
     series_types: {}
-    y_axes: [{label: '', orientation: left, series: [{id: ban - camiliame_logs.count,
-            name: ban, axisId: cloudflare_logs.count}, {id: simulate - camiliame_logs.count,
+    y_axes: [{label: '', orientation: left, series: [{id: ban - cf_analytics_logs.count,
+            name: ban, axisId: cloudflare_logs.count}, {id: simulate - cf_analytics_logs.count,
             name: simulate, axisId: cloudflare_logs.count}], showLabels: true, showValues: true,
         unpinAxis: false, tickDensity: default, tickDensityCustom: 5, type: linear}]
     y_axis_combined: true
@@ -884,8 +884,8 @@
     point_style: none
     series_types: {}
     limit_displayed_rows: false
-    y_axes: [{label: '', orientation: left, series: [{id: ban - camiliame_logs.count,
-            name: ban, axisId: cloudflare_logs.count}, {id: simulate - camiliame_logs.count,
+    y_axes: [{label: '', orientation: left, series: [{id: ban - cf_analytics_logs.count,
+            name: ban, axisId: cloudflare_logs.count}, {id: simulate - cf_analytics_logs.count,
             name: simulate, axisId: cloudflare_logs.count}], showLabels: true, showValues: true,
         unpinAxis: false, tickDensity: default, tickDensityCustom: 5, type: linear}]
     y_axis_combined: true
@@ -953,8 +953,8 @@
     y_axis_gridlines: true
     point_style: none
     series_types: {}
-    y_axes: [{label: '', orientation: left, series: [{id: ban - camiliame_logs.count,
-            name: ban, axisId: cloudflare_logs.count}, {id: simulate - camiliame_logs.count,
+    y_axes: [{label: '', orientation: left, series: [{id: ban - cf_analytics_logs.count,
+            name: ban, axisId: cloudflare_logs.count}, {id: simulate - cf_analytics_logs.count,
             name: simulate, axisId: cloudflare_logs.count}], showLabels: true, showValues: true,
         unpinAxis: false, tickDensity: default, tickDensityCustom: 5, type: linear}]
     y_axis_combined: true
@@ -1021,8 +1021,8 @@
     y_axis_gridlines: true
     point_style: none
     series_types: {}
-    y_axes: [{label: '', orientation: left, series: [{id: ban - camiliame_logs.count,
-            name: ban, axisId: cloudflare_logs.count}, {id: simulate - camiliame_logs.count,
+    y_axes: [{label: '', orientation: left, series: [{id: ban - cf_analytics_logs.count,
+            name: ban, axisId: cloudflare_logs.count}, {id: simulate - cf_analytics_logs.count,
             name: simulate, axisId: cloudflare_logs.count}], showLabels: true, showValues: true,
         unpinAxis: false, tickDensity: default, tickDensityCustom: 5, type: linear}]
     y_axis_combined: true
@@ -1090,8 +1090,8 @@
     y_axis_gridlines: true
     point_style: none
     series_types: {}
-    y_axes: [{label: '', orientation: left, series: [{id: ban - camiliame_logs.count,
-            name: ban, axisId: cloudflare_logs.count}, {id: simulate - camiliame_logs.count,
+    y_axes: [{label: '', orientation: left, series: [{id: ban - cf_analytics_logs.count,
+            name: ban, axisId: cloudflare_logs.count}, {id: simulate - cf_analytics_logs.count,
             name: simulate, axisId: cloudflare_logs.count}], showLabels: true, showValues: true,
         unpinAxis: false, tickDensity: default, tickDensityCustom: 5, type: linear}]
     y_axis_combined: true

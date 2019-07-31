@@ -132,9 +132,9 @@
     show_view_names: false
     point_style: none
     series_colors:
-      200 - camiliame_logs.count: "#26802a"
-      403 - camiliame_logs.count: "#992e68"
-      404 - camiliame_logs.count: "#a936b3"
+      200 - cf_analytics_logs.count: "#26802a"
+      403 - cf_analytics_logs.count: "#992e68"
+      404 - cf_analytics_logs.count: "#a936b3"
     series_types: {}
     limit_displayed_rows: false
     hidden_series: []
@@ -198,9 +198,9 @@
     show_view_names: false
     point_style: none
     series_colors:
-      200 - camiliame_logs.count: "#26802a"
-      403 - camiliame_logs.count: "#992e68"
-      404 - camiliame_logs.count: "#a936b3"
+      200 - cf_analytics_logs.count: "#26802a"
+      403 - cf_analytics_logs.count: "#992e68"
+      404 - cf_analytics_logs.count: "#a936b3"
     series_types: {}
     limit_displayed_rows: false
     hidden_series: []
@@ -264,9 +264,9 @@
     show_view_names: false
     point_style: none
     series_colors:
-      200 - camiliame_logs.count: "#26802a"
-      403 - camiliame_logs.count: "#992e68"
-      404 - camiliame_logs.count: "#a936b3"
+      200 - cf_analytics_logs.count: "#26802a"
+      403 - cf_analytics_logs.count: "#992e68"
+      404 - cf_analytics_logs.count: "#a936b3"
     series_types: {}
     limit_displayed_rows: false
     hidden_series: []
@@ -368,8 +368,8 @@
     point_style: none
     series_types: {}
     limit_displayed_rows: false
-    y_axes: [{label: '', orientation: left, series: [{id: desktop - camiliame_logs.count,
-            name: desktop, axisId: cloudflare_logs.count}, {id: mobile - camiliame_logs.count,
+    y_axes: [{label: '', orientation: left, series: [{id: desktop - cf_analytics_logs.count,
+            name: desktop, axisId: cloudflare_logs.count}, {id: mobile - cf_analytics_logs.count,
             name: mobile, axisId: cloudflare_logs.count}], showLabels: false, showValues: true,
         unpinAxis: false, tickDensity: default, tickDensityCustom: 5, type: linear}]
     y_axis_combined: true
@@ -431,8 +431,8 @@
     point_style: none
     series_types: {}
     limit_displayed_rows: false
-    y_axes: [{label: '', orientation: left, series: [{id: desktop - camiliame_logs.count,
-            name: desktop, axisId: cloudflare_logs.count}, {id: mobile - camiliame_logs.count,
+    y_axes: [{label: '', orientation: left, series: [{id: desktop - cf_analytics_logs.count,
+            name: desktop, axisId: cloudflare_logs.count}, {id: mobile - cf_analytics_logs.count,
             name: mobile, axisId: cloudflare_logs.count}], showLabels: false, showValues: true,
         unpinAxis: false, tickDensity: default, tickDensityCustom: 5, type: linear}]
     y_axis_combined: true
@@ -494,8 +494,8 @@
     point_style: none
     series_types: {}
     limit_displayed_rows: false
-    y_axes: [{label: '', orientation: left, series: [{id: desktop - camiliame_logs.count,
-            name: desktop, axisId: cloudflare_logs.count}, {id: mobile - camiliame_logs.count,
+    y_axes: [{label: '', orientation: left, series: [{id: desktop - cf_analytics_logs.count,
+            name: desktop, axisId: cloudflare_logs.count}, {id: mobile - cf_analytics_logs.count,
             name: mobile, axisId: cloudflare_logs.count}], showLabels: false, showValues: true,
         unpinAxis: false, tickDensity: default, tickDensityCustom: 5, type: linear}]
     y_axis_combined: true
@@ -557,21 +557,21 @@
     series_colors: {}
     series_types: {}
     limit_displayed_rows: false
-    y_axes: [{label: Ops, orientation: left, series: [{id: 0 - camiliame_logs.count,
-            name: '0', axisId: camiliame_logs.count}, {id: 200 - camiliame_logs.count,
-            name: '200', axisId: camiliame_logs.count}, {id: 206 - camiliame_logs.count,
-            name: '206', axisId: camiliame_logs.count}, {id: 301 - camiliame_logs.count,
-            name: '301', axisId: camiliame_logs.count}, {id: 302 - camiliame_logs.count,
-            name: '302', axisId: camiliame_logs.count}, {id: 304 - camiliame_logs.count,
-            name: '304', axisId: camiliame_logs.count}, {id: 401 - camiliame_logs.count,
-            name: '401', axisId: camiliame_logs.count}, {id: 403 - camiliame_logs.count,
-            name: '403', axisId: camiliame_logs.count}, {id: 404 - camiliame_logs.count,
-            name: '404', axisId: camiliame_logs.count}, {id: 405 - camiliame_logs.count,
-            name: '405', axisId: camiliame_logs.count}, {id: 500 - camiliame_logs.count,
-            name: '500', axisId: camiliame_logs.count}, {id: 502 - camiliame_logs.count,
-            name: '502', axisId: camiliame_logs.count}, {id: 503 - camiliame_logs.count,
-            name: '503', axisId: camiliame_logs.count}, {id: 520 - camiliame_logs.count,
-            name: '520', axisId: camiliame_logs.count}], showLabels: true, showValues: true,
+    y_axes: [{label: Ops, orientation: left, series: [{id: 0 - cf_analytics_logs.count,
+            name: '0', axisId: cf_analytics_logs.count}, {id: 200 - cf_analytics_logs.count,
+            name: '200', axisId: cf_analytics_logs.count}, {id: 206 - cf_analytics_logs.count,
+            name: '206', axisId: cf_analytics_logs.count}, {id: 301 - cf_analytics_logs.count,
+            name: '301', axisId: cf_analytics_logs.count}, {id: 302 - cf_analytics_logs.count,
+            name: '302', axisId: cf_analytics_logs.count}, {id: 304 - cf_analytics_logs.count,
+            name: '304', axisId: cf_analytics_logs.count}, {id: 401 - cf_analytics_logs.count,
+            name: '401', axisId: cf_analytics_logs.count}, {id: 403 - cf_analytics_logs.count,
+            name: '403', axisId: cf_analytics_logs.count}, {id: 404 - cf_analytics_logs.count,
+            name: '404', axisId: cf_analytics_logs.count}, {id: 405 - cf_analytics_logs.count,
+            name: '405', axisId: cf_analytics_logs.count}, {id: 500 - cf_analytics_logs.count,
+            name: '500', axisId: cf_analytics_logs.count}, {id: 502 - cf_analytics_logs.count,
+            name: '502', axisId: cf_analytics_logs.count}, {id: 503 - cf_analytics_logs.count,
+            name: '503', axisId: cf_analytics_logs.count}, {id: 520 - cf_analytics_logs.count,
+            name: '520', axisId: cf_analytics_logs.count}], showLabels: true, showValues: true,
         unpinAxis: false, tickDensity: default, tickDensityCustom: 5, type: linear}]
     y_axis_combined: true
     show_y_axis_labels: true
@@ -631,9 +631,9 @@
     show_view_names: false
     point_style: none
     series_colors:
-      200 - camiliame_logs.count: "#26802a"
-      403 - camiliame_logs.count: "#992e68"
-      404 - camiliame_logs.count: "#a936b3"
+      200 - cf_analytics_logs.count: "#26802a"
+      403 - cf_analytics_logs.count: "#992e68"
+      404 - cf_analytics_logs.count: "#a936b3"
     series_types: {}
     limit_displayed_rows: false
     hidden_series: []
@@ -703,12 +703,12 @@
     point_style: none
     series_types: {}
     limit_displayed_rows: false
-    y_axes: [{label: Requests, orientation: left, series: [{id: expired - camiliame_logs.count,
-            name: expired, axisId: cloudflare_logs.count}, {id: hit - camiliame_logs.count,
-            name: hit, axisId: cloudflare_logs.count}, {id: miss - camiliame_logs.count,
-            name: miss, axisId: cloudflare_logs.count}, {id: revalidated - camiliame_logs.count,
-            name: revalidated, axisId: cloudflare_logs.count}, {id: unknown - camiliame_logs.count,
-            name: unknown, axisId: cloudflare_logs.count}, {id: updating - camiliame_logs.count,
+    y_axes: [{label: Requests, orientation: left, series: [{id: expired - cf_analytics_logs.count,
+            name: expired, axisId: cloudflare_logs.count}, {id: hit - cf_analytics_logs.count,
+            name: hit, axisId: cloudflare_logs.count}, {id: miss - cf_analytics_logs.count,
+            name: miss, axisId: cloudflare_logs.count}, {id: revalidated - cf_analytics_logs.count,
+            name: revalidated, axisId: cloudflare_logs.count}, {id: unknown - cf_analytics_logs.count,
+            name: unknown, axisId: cloudflare_logs.count}, {id: updating - cf_analytics_logs.count,
             name: updating, axisId: cloudflare_logs.count}], showLabels: true, showValues: true,
         unpinAxis: false, tickDensity: default, tickDensityCustom: 5, type: linear}]
     y_axis_combined: true
@@ -1034,8 +1034,8 @@
     point_style: none
     series_colors: {}
     series_labels:
-      camiliame_logs.count_origin_requests: Origin Requests
-      camiliame_logs.count_edge_requests: Total Requests
+      cf_analytics_logs.count_origin_requests: Origin Requests
+      cf_analytics_logs.count_edge_requests: Total Requests
     series_types: {}
     limit_displayed_rows: false
     y_axes: [{label: rps, orientation: left, series: [{id: cloudflare_logs.avg_rps_15m,
@@ -1101,16 +1101,16 @@
     point_style: none
     series_colors: {}
     series_labels:
-      camiliame_logs.count_origin_requests: Origin Requests
-      camiliame_logs.count_edge_requests: Edge Requests
-      camiliame_logs.total_edge_bandwidth: Edge Bandwidth
-      camiliame_logs.total_origin_bandwidth: Origin Bandwidth
+      cf_analytics_logs.count_origin_requests: Origin Requests
+      cf_analytics_logs.count_edge_requests: Edge Requests
+      cf_analytics_logs.total_edge_bandwidth: Edge Bandwidth
+      cf_analytics_logs.total_origin_bandwidth: Origin Bandwidth
     series_types: {}
     limit_displayed_rows: false
     hidden_series: []
-    y_axes: [{label: '', orientation: left, series: [{id: camiliame_logs.total_edge_bandwidth,
-            name: Edge Bandwidth, axisId: camiliame_logs.total_edge_bandwidth}, {
-            id: camiliame_logs.total_origin_bandwidth, name: Origin Bandwidth, axisId: camiliame_logs.total_origin_bandwidth}],
+    y_axes: [{label: '', orientation: left, series: [{id: cf_analytics_logs.total_edge_bandwidth,
+            name: Edge Bandwidth, axisId: cf_analytics_logs.total_edge_bandwidth}, {
+            id: cf_analytics_logs.total_origin_bandwidth, name: Origin Bandwidth, axisId: cf_analytics_logs.total_origin_bandwidth}],
         showLabels: true, showValues: true, valueFormat: '[>=1099511627776]0.00,,,,"
           Tbps";[>=1073741824]0.00,,," Gbps";[>=1048576]0.00,," Mbps";[>1024]0.00,"
           Kbps"', unpinAxis: false, tickDensity: default, type: linear}]
@@ -1368,19 +1368,19 @@
     series_types: {}
     limit_displayed_rows: false
     y_axes: [{label: Requests, orientation: left, series: [{id: access.camilia.me
-              - camiliame_logs.count, name: access.camilia.me, axisId: cloudflare_logs.count},
-          {id: admin.camilia.me - camiliame_logs.count, name: admin.camilia.me, axisId: cloudflare_logs.count},
-          {id: c4ca4238a0b923820dcc509a6f75849b.camilia.me - camiliame_logs.count,
+              - cf_analytics_logs.count, name: access.camilia.me, axisId: cloudflare_logs.count},
+          {id: admin.camilia.me - cf_analytics_logs.count, name: admin.camilia.me, axisId: cloudflare_logs.count},
+          {id: c4ca4238a0b923820dcc509a6f75849b.camilia.me - cf_analytics_logs.count,
             name: c4ca4238a0b923820dcc509a6f75849b.camilia.me, axisId: cloudflare_logs.count},
-          {id: c513153ecafa067c9247304d538e1e32.camilia.me - camiliame_logs.count,
+          {id: c513153ecafa067c9247304d538e1e32.camilia.me - cf_analytics_logs.count,
             name: c513153ecafa067c9247304d538e1e32.camilia.me, axisId: cloudflare_logs.count},
-          {id: camilia.me - camiliame_logs.count, name: camilia.me, axisId: cloudflare_logs.count},
-          {id: f8522ebf95af9a9cc0b0c2663eebcb20.camilia.me - camiliame_logs.count,
+          {id: camilia.me - cf_analytics_logs.count, name: camilia.me, axisId: cloudflare_logs.count},
+          {id: f8522ebf95af9a9cc0b0c2663eebcb20.camilia.me - cf_analytics_logs.count,
             name: f8522ebf95af9a9cc0b0c2663eebcb20.camilia.me, axisId: cloudflare_logs.count},
-          {id: login.camilia.me - camiliame_logs.count, name: login.camilia.me, axisId: cloudflare_logs.count},
-          {id: net.camilia.me - camiliame_logs.count, name: net.camilia.me, axisId: cloudflare_logs.count},
-          {id: stats.camilia.me - camiliame_logs.count, name: stats.camilia.me, axisId: cloudflare_logs.count},
-          {id: www.camilia.me - camiliame_logs.count, name: www.camilia.me, axisId: cloudflare_logs.count}],
+          {id: login.camilia.me - cf_analytics_logs.count, name: login.camilia.me, axisId: cloudflare_logs.count},
+          {id: net.camilia.me - cf_analytics_logs.count, name: net.camilia.me, axisId: cloudflare_logs.count},
+          {id: stats.camilia.me - cf_analytics_logs.count, name: stats.camilia.me, axisId: cloudflare_logs.count},
+          {id: www.camilia.me - cf_analytics_logs.count, name: www.camilia.me, axisId: cloudflare_logs.count}],
         showLabels: true, showValues: true, valueFormat: '', unpinAxis: false, tickDensity: default,
         type: linear}]
     y_axis_combined: true
@@ -1447,12 +1447,12 @@
     series_types: {}
     limit_displayed_rows: false
     y_axes: [{label: Requests, orientation: left, series: [{id: application/javascript
-              - camiliame_logs.count, name: application/javascript, axisId: cloudflare_logs.count},
-          {id: application/javascript; charset=utf-8 - camiliame_logs.count, name: application/javascript;
+              - cf_analytics_logs.count, name: application/javascript, axisId: cloudflare_logs.count},
+          {id: application/javascript; charset=utf-8 - cf_analytics_logs.count, name: application/javascript;
               charset=utf-8, axisId: cloudflare_logs.count}, {id: text/html; charset=iso-8859-1
-              - camiliame_logs.count, name: text/html; charset=iso-8859-1, axisId: cloudflare_logs.count},
-          {id: text/html; charset=UTF-8 - camiliame_logs.count, name: text/html; charset=UTF-8,
-            axisId: cloudflare_logs.count}, {id: text/xml; charset=UTF-8 - camiliame_logs.count,
+              - cf_analytics_logs.count, name: text/html; charset=iso-8859-1, axisId: cloudflare_logs.count},
+          {id: text/html; charset=UTF-8 - cf_analytics_logs.count, name: text/html; charset=UTF-8,
+            axisId: cloudflare_logs.count}, {id: text/xml; charset=UTF-8 - cf_analytics_logs.count,
             name: text/xml; charset=UTF-8, axisId: cloudflare_logs.count}], showLabels: true,
         showValues: true, unpinAxis: false, tickDensity: default, type: linear}]
     y_axis_combined: true
@@ -1646,9 +1646,9 @@
       404 - cloudflare_logs.count: "#f3280b"
     series_types: {}
     limit_displayed_rows: false
-    y_axes: [{label: Requests, orientation: left, series: [{id: none - camiliame_logs.count,
-            name: none, axisId: cloudflare_logs.count}, {id: TLSv1 - camiliame_logs.count,
-            name: TLSv1, axisId: cloudflare_logs.count}, {id: TLSv1.2 - camiliame_logs.count,
+    y_axes: [{label: Requests, orientation: left, series: [{id: none - cf_analytics_logs.count,
+            name: none, axisId: cloudflare_logs.count}, {id: TLSv1 - cf_analytics_logs.count,
+            name: TLSv1, axisId: cloudflare_logs.count}, {id: TLSv1.2 - cf_analytics_logs.count,
             name: TLSv1.2, axisId: cloudflare_logs.count}], showLabels: true, showValues: true,
         unpinAxis: false, tickDensity: default, type: linear}]
     y_axis_combined: true
@@ -1714,8 +1714,8 @@
       404 - cloudflare_logs.count: "#f3280b"
     series_types: {}
     limit_displayed_rows: false
-    y_axes: [{label: Requests, orientation: left, series: [{id: GET - camiliame_logs.count,
-            name: GET, axisId: cloudflare_logs.count}, {id: POST - camiliame_logs.count,
+    y_axes: [{label: Requests, orientation: left, series: [{id: GET - cf_analytics_logs.count,
+            name: GET, axisId: cloudflare_logs.count}, {id: POST - cf_analytics_logs.count,
             name: POST, axisId: cloudflare_logs.count}], showLabels: true, showValues: true,
         unpinAxis: false, tickDensity: default, type: linear}]
     y_axis_combined: true

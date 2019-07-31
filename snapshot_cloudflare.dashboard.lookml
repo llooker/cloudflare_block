@@ -149,8 +149,8 @@
     point_style: none
     series_types: {}
     limit_displayed_rows: false
-    y_axes: [{label: '', orientation: left, series: [{id: desktop - camiliame_logs.count,
-            name: desktop, axisId: cloudflare_logs.count}, {id: mobile - camiliame_logs.count,
+    y_axes: [{label: '', orientation: left, series: [{id: desktop - cf_analytics_logs.count,
+            name: desktop, axisId: cloudflare_logs.count}, {id: mobile - cf_analytics_logs.count,
             name: mobile, axisId: cloudflare_logs.count}], showLabels: false, showValues: true,
         unpinAxis: false, tickDensity: default, tickDensityCustom: 5, type: linear}]
     y_axis_combined: true
@@ -210,8 +210,8 @@
     point_style: none
     series_types: {}
     limit_displayed_rows: false
-    y_axes: [{label: '', orientation: left, series: [{id: desktop - camiliame_logs.count,
-            name: desktop, axisId: cloudflare_logs.count}, {id: mobile - camiliame_logs.count,
+    y_axes: [{label: '', orientation: left, series: [{id: desktop - cf_analytics_logs.count,
+            name: desktop, axisId: cloudflare_logs.count}, {id: mobile - cf_analytics_logs.count,
             name: mobile, axisId: cloudflare_logs.count}], showLabels: false, showValues: true,
         unpinAxis: false, tickDensity: default, tickDensityCustom: 5, type: linear}]
     y_axis_combined: true
@@ -271,8 +271,8 @@
     point_style: none
     series_types: {}
     limit_displayed_rows: false
-    y_axes: [{label: '', orientation: left, series: [{id: desktop - camiliame_logs.count,
-            name: desktop, axisId: cloudflare_logs.count}, {id: mobile - camiliame_logs.count,
+    y_axes: [{label: '', orientation: left, series: [{id: desktop - cf_analytics_logs.count,
+            name: desktop, axisId: cloudflare_logs.count}, {id: mobile - cf_analytics_logs.count,
             name: mobile, axisId: cloudflare_logs.count}], showLabels: false, showValues: true,
         unpinAxis: false, tickDensity: default, tickDensityCustom: 5, type: linear}]
     y_axis_combined: true
@@ -649,9 +649,9 @@
     show_view_names: false
     point_style: none
     series_colors:
-      200 - camiliame_logs.count: "#26802a"
-      403 - camiliame_logs.count: "#992e68"
-      404 - camiliame_logs.count: "#a936b3"
+      200 - cf_analytics_logs.count: "#26802a"
+      403 - cf_analytics_logs.count: "#992e68"
+      404 - cf_analytics_logs.count: "#a936b3"
     series_types: {}
     limit_displayed_rows: false
     hidden_series: []
@@ -715,9 +715,9 @@
     show_view_names: false
     point_style: none
     series_colors:
-      200 - camiliame_logs.count: "#26802a"
-      403 - camiliame_logs.count: "#992e68"
-      404 - camiliame_logs.count: "#a936b3"
+      200 - cf_analytics_logs.count: "#26802a"
+      403 - cf_analytics_logs.count: "#992e68"
+      404 - cf_analytics_logs.count: "#a936b3"
     series_types: {}
     limit_displayed_rows: false
     hidden_series: []

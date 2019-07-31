@@ -3,8 +3,8 @@ view: current_second_stats {
     sql: select max(TIMESTAMP_TRUNC(edgestarttimestamp, SECOND)) as current_second,
                 avg(edgeresponsebytes) as current_bps,
                 count(*) as current_ops
-        from camiliame_logs
-        where TIMESTAMP_TRUNC(edgestarttimestamp, SECOND) = (SELECT max(TIMESTAMP_TRUNC(edgestarttimestamp, SECOND)) from camiliame_logs)
+        from cf_analytics_logs
+        where TIMESTAMP_TRUNC(edgestarttimestamp, SECOND) = (SELECT max(TIMESTAMP_TRUNC(edgestarttimestamp, SECOND)) from cf_analytics_logs)
              ;;
 #     persist_for: "168 hours"
   }

@@ -5,7 +5,7 @@ view: events_per_second {
         TIMESTAMP_TRUNC(EdgeStartTimestamp, SECOND) AS time_seconds,
         COUNT(*) AS events_per_second_count
      FROM
-        cloudflare_logs.camiliame_logs
+        cloudflare_data.cf_analytics_logs
      GROUP BY 1
      ORDER BY 2 DESC
        ;;

@@ -1,5 +1,5 @@
 view: cloudflare_logs {
-  sql_table_name: cloudflare_logs.camiliame_logs ;;
+  sql_table_name: cloudflare_data.cf_analytics_logs ;;
 
 
   dimension: is_threat {

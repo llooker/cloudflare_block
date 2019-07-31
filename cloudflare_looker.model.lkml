@@ -1,4 +1,4 @@
-connection: "bigquery_camiliame"
+connection: "bq-cfanalytics"
 
 # include all the views
 include: "*.view"
@@ -6,12 +6,12 @@ include: "*.view"
 # include all the dashboards
 # include: "*.dashboard.lookml"
 
-datagroup: camilia_looker_default_datagroup {
+datagroup: cloudflare_looker_default_datagroup {
 #   sql_trigger: SELECT MAX(id) FROM etl_log;;
   max_cache_age: "1 hour"
 }
 
-persist_with: camilia_looker_default_datagroup
+persist_with: cloudflare_looker_default_datagroup
 
 explore: cloudflare_logs {
 
