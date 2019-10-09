@@ -289,6 +289,12 @@ view: cloudflare_logs {
     group_label: "Client"
   }
 
+  dimension: edge_colo_code {
+    type: number
+    sql: ${TABLE}.EdgeColoCode ;;
+    group_label: "Edge"
+  }
+
   dimension: edge_colo_id {
     type: number
     sql: ${TABLE}.EdgeColoID ;;
@@ -448,6 +454,24 @@ view: cloudflare_logs {
     type: date_time
     group_label: "Edge"
     sql: TIMESTAMP_TRUNC(${TABLE}.EdgeStartTimestamp, SECOND) ;;
+  }
+
+  dimension: firewall_matches_actions {
+    type: string
+    sql: ${TABLE}.FirewallMatchesActions ;;
+    #hidden: yes
+  }
+
+  dimension: firewall_matches_rule_ids {
+    type: string
+    sql: ${TABLE}.FirewallMatchesRuleIDs ;;
+    #hidden: yes
+  }
+
+  dimension: firewall_matches_sources {
+    type: string
+    sql: ${TABLE}.FirewallMatchesSources ;;
+    #hidden: yes
   }
 
   dimension: origin_ip {
