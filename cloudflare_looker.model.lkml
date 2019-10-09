@@ -14,6 +14,13 @@ datagroup: cloudflare_looker_default_datagroup {
 persist_with: cloudflare_looker_default_datagroup
 
 explore: cloudflare_logs {
+  cancel_grouping_fields: [cloudflare_logs.firewall_matches_actions, cloudflare_logs.firewall_matches_rule_ids, cloudflare_logs.firewall_matches_sources]
+  view_name: cloudflare_logs
+  join: firewall_matches {
+    type: left_outer
+    relationship: one_to_many
+    sql_on:  ${cloudflare_logs.ray_id} = ${firewall_matches.ray_id};;
+  }
 
   join: countries {
     relationship: one_to_one
@@ -33,15 +40,15 @@ explore: cloudflare_logs {
   }
 }
 
-explore: cfloudflare_logs {
-  cancel_grouping_fields: [cloudflare_logs.firewall_matches_actions, cloudflare_logs.firewall_matches_rule_ids, cloudflare_logs.firewall_matches_sources]
-  view_name: cloudflare_logs
-  join: firewall_matches {
-    type: left_outer
-    relationship: one_to_many
-    sql_on:  ${cloudflare_logs.ray_id} = ${firewall_matches.ray_id};;
-  }
-}
+#explore: cloudflare_logs {
+#  cancel_grouping_fields: [cloudflare_logs.firewall_matches_actions, cloudflare_logs.firewall_matches_rule_ids, cloudflare_logs.firewall_matches_sources]
+#  view_name: cloudflare_logs
+#  join: firewall_matches {
+#    type: left_outer
+#    relationship: one_to_many
+#    sql_on:  ${cloudflare_logs.ray_id} = ${firewall_matches.ray_id};;
+#  }
+#}
 
 
 explore: events_per_second {}
